@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?b8febc6756d7e3980a068de85e5ba226"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>基本TCP套接字编程 | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="tcp,计算机网络,UNIX网络编程">
+    <meta name="description" content="基础源码(请求日期和时间)客户端12345678910111213141516171819202122232425262728293031323334#include	&quot;unp.h&quot;intmain(int argc, char **argv)&amp;#123;	int					sockfd, n;	char				recvline[MAXLINE + 1];	struct sockaddr_in	ser">
+<meta name="keywords" content="tcp,计算机网络,UNIX网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本TCP套接字编程">
+<meta property="og:url" content="https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/index.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="基础源码(请求日期和时间)客户端12345678910111213141516171819202122232425262728293031323334#include	&quot;unp.h&quot;intmain(int argc, char **argv)&amp;#123;	int					sockfd, n;	char				recvline[MAXLINE + 1];	struct sockaddr_in	ser">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-03T04:50:02.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基本TCP套接字编程">
+<meta name="twitter:description" content="基础源码(请求日期和时间)客户端12345678910111213141516171819202122232425262728293031323334#include	&quot;unp.h&quot;intmain(int argc, char **argv)&amp;#123;	int					sockfd, n;	char				recvline[MAXLINE + 1];	struct sockaddr_in	ser">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail">me@zhaoziwen</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">基本TCP套接字编程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">基本TCP套接字编程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-13T11:51:39.000Z" itemprop="datePublished" class="page-time">
+  2019-04-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机网络/">计算机网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基础源码-请求日期和时间"><span class="post-toc-number">1.</span> <span class="post-toc-text">基础源码(请求日期和时间)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#客户端"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">客户端</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#服务端"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">服务端</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#部分函数解释"><span class="post-toc-number">2.</span> <span class="post-toc-text">部分函数解释</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#socket函数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">socket函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#connect函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">connect函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bind函数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">bind函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#listen函数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">listen函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#accept函数"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">accept函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#fork和exec函数"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">fork和exec函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#并发服务器"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">并发服务器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#close函数"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">close函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#getsockname和getpeername函数"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">getsockname和getpeername函数</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-basic-tcp-socket-code" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">基本TCP套接字编程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-13 19:51:39" datetime="2019-04-13T11:51:39.000Z" itemprop="datePublished">2019-04-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机网络/">计算机网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="基础源码-请求日期和时间"><a href="#基础源码-请求日期和时间" class="headerlink" title="基础源码(请求日期和时间)"></a>基础源码(请求日期和时间)</h4><h5 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span>	<span class="meta-string">"unp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span>					sockfd, n;</span><br><span class="line">	<span class="keyword">char</span>				recvline[MAXLINE + <span class="number">1</span>];</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span>	<span class="title">servaddr</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">2</span>)</span><br><span class="line">		err_quit(<span class="string">"usage: a.out &lt;IPaddress&gt;"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( (sockfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		err_sys(<span class="string">"socket error"</span>);</span><br><span class="line"></span><br><span class="line">	bzero(&amp;servaddr, <span class="keyword">sizeof</span>(servaddr));</span><br><span class="line">	servaddr.sin_family = AF_INET;</span><br><span class="line">	servaddr.sin_port   = htons(<span class="number">13</span>);	<span class="comment">/* daytime server */</span></span><br><span class="line">	<span class="keyword">if</span> (inet_pton(AF_INET, argv[<span class="number">1</span>], &amp;servaddr.sin_addr) &lt;= <span class="number">0</span>)</span><br><span class="line">		err_quit(<span class="string">"inet_pton error for %s"</span>, argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (connect(sockfd, (SA *) &amp;servaddr, <span class="keyword">sizeof</span>(servaddr)) &lt; <span class="number">0</span>)</span><br><span class="line">		err_sys(<span class="string">"connect error"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> ( (n = read(sockfd, recvline, MAXLINE)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		recvline[n] = <span class="number">0</span>;	<span class="comment">/* null terminate */</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">fputs</span>(recvline, <span class="built_in">stdout</span>) == EOF)</span><br><span class="line">			err_sys(<span class="string">"fputs error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>)</span><br><span class="line">		err_sys(<span class="string">"read error"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span>	<span class="meta-string">"unp.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>	<span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>    <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span>					listenfd, connfd;</span><br><span class="line">	<span class="keyword">socklen_t</span>			len;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span>	<span class="title">servaddr</span>, <span class="title">cliaddr</span>;</span></span><br><span class="line">	<span class="keyword">char</span>				buff[MAXLINE];</span><br><span class="line">	<span class="keyword">time_t</span>				ticks;</span><br><span class="line"></span><br><span class="line">	listenfd = Socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	bzero(&amp;servaddr, <span class="keyword">sizeof</span>(servaddr));</span><br><span class="line">	servaddr.sin_family      = AF_INET;</span><br><span class="line">	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);</span><br><span class="line">	servaddr.sin_port        = htons(<span class="number">13</span>);	<span class="comment">/* daytime server */</span></span><br><span class="line"></span><br><span class="line">	Bind(listenfd, (SA *) &amp;servaddr, <span class="keyword">sizeof</span>(servaddr));</span><br><span class="line"></span><br><span class="line">	Listen(listenfd, LISTENQ);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 阻塞服务器</span></span><br><span class="line">	<span class="comment">// for ( ; ; ) &#123;</span></span><br><span class="line">	<span class="comment">// 	len = sizeof(cliaddr);</span></span><br><span class="line">	<span class="comment">// 	connfd = Accept(listenfd, (SA *) &amp;cliaddr, &amp;len);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 	sleep(5);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 	printf("connection from %s, port %d\n",</span></span><br><span class="line">	<span class="comment">// 		   Inet_ntop(AF_INET, &amp;cliaddr.sin_addr, buff, sizeof(buff)),</span></span><br><span class="line">	<span class="comment">// 		   ntohs(cliaddr.sin_port));</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//        ticks = time(NULL);</span></span><br><span class="line"> <span class="comment">//        snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&amp;ticks));</span></span><br><span class="line"> <span class="comment">//        Write(connfd, buff, strlen(buff));</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 	Close(connfd);</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 并发服务器</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">pid_t</span> pid;</span><br><span class="line">	<span class="keyword">for</span>(;;) &#123;</span><br><span class="line">		len = <span class="keyword">sizeof</span>(cliaddr);</span><br><span class="line">		connfd = Accept(listenfd, (SA *) &amp;cliaddr, &amp;len);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>((pid = Fork()) == <span class="number">0</span>) &#123;</span><br><span class="line">			Close(listenfd);</span><br><span class="line">			sleep(<span class="number">5</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"connection from %s, port %d\n"</span>,</span><br><span class="line">			   Inet_ntop(AF_INET, &amp;cliaddr.sin_addr, buff, <span class="keyword">sizeof</span>(buff)),</span><br><span class="line">			   ntohs(cliaddr.sin_port));</span><br><span class="line">			ticks = time(<span class="literal">NULL</span>);</span><br><span class="line">			<span class="built_in">snprintf</span>(buff, <span class="keyword">sizeof</span>(buff), <span class="string">"%.24s\r\n"</span>, ctime(&amp;ticks));</span><br><span class="line">			Write(connfd, buff, <span class="built_in">strlen</span>(buff));</span><br><span class="line">			Close(connfd);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		Close(connfd);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="部分函数解释"><a href="#部分函数解释" class="headerlink" title="部分函数解释"></a>部分函数解释</h4><h5 id="socket函数"><a href="#socket函数" class="headerlink" title="socket函数"></a>socket函数</h5><p>执行网络I/O的进程必须做的第一件事情</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>family常值：</p>
+<p>​    IPv4协议：AF_INET</p>
+<p>​    IPv6协议：AF_INET6</p>
+<p>type常值：</p>
+<p>​    字节流套接字：SOCK_STREAM</p>
+<p>​    数据报套接字：SOCK_DGRAM</p>
+<p>protocol常值：</p>
+<p>​    TCP传输协议：IPPROTO_CP</p>
+<p>​    UDP传输协议：IPPROTO_UDP</p>
+<p>返回值：</p>
+<p>​    成功时返回一个小的非负整数值，称为套接字描述符，简称sockfd</p>
+<h5 id="connect函数"><a href="#connect函数" class="headerlink" title="connect函数"></a>connect函数</h5><p>TCP客户用connect函数来建立与TCP服务器的连接</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *servaddr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>出错返回情况：</p>
+<p>1、一定时间内没有收到SYN分节的响应，返回ETIMEDOUT错误</p>
+<p>2、若对SYN的响应是RST，表明该服务器主机在指定端口上没有进程在等待与之连接。返回ECONNREFUSED错误</p>
+<p>3、客户发出的SYN在中间的某个路由器上引发了一个”destination unreachable”ICMP错误。若在一段时间内仍未收到响应，则返回EHOSTUNREACH或ENETUNREACH错误</p>
+<h5 id="bind函数"><a href="#bind函数" class="headerlink" title="bind函数"></a>bind函数</h5><p>把一个本地协议地址赋予一个套接字</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *myaddr, <span class="keyword">socken_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于IPv4，同配地址由常值INADDR_ANY来指定，其值一般为0</p>
+<p>对于IPv6，因为128位的IPv6地址是存放在一个结构中的。(在C语言中，赋值语句的右边无法表示常值结构)，则可以改写为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in6</span> <span class="title">serv</span>;</span></span><br><span class="line">serv.sin6_addr = in6addr_any;</span><br></pre></td></tr></table></figure>
+
+<p>系统预先分配in6addr_any变量并将其初始化为常值IN6ADDR_ANY_INIT。头文件&lt;netinet/in.h&gt;中含有in6addr_any的extern声明(0的网络字节序和主机字节序一样，所以没用htonl)</p>
+<h5 id="listen函数"><a href="#listen函数" class="headerlink" title="listen函数"></a>listen函数</h5><p>listen函数仅由TCP服务器调用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>第二个参数规定了内核应该为相应套接字排队的最大连接个数</p>
+<p>该函数在socket和bind之后调用，在accept之前调用</p>
+<h5 id="accept函数"><a href="#accept函数" class="headerlink" title="accept函数"></a>accept函数</h5><p>accept函数由TCP服务器调用，用于从已完成连接队列头返回下一个已完成连接。如果为空，则投入睡眠</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *cliaddr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>它的第一个参数为监听套接字描述符，返回值为已连接套接字描述符</p>
+<h5 id="fork和exec函数"><a href="#fork和exec函数" class="headerlink" title="fork和exec函数"></a>fork和exec函数</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">pid_t</span> fork(<span class="keyword">void</span>);</span><br></pre></td></tr></table></figure>
+
+<p>fork函数调用一次，返回两次。在调用进程(父进程)返回一次，返回值为新派生的进程(子进程)的进程ID号。在子进程又返回一次，返回值为0</p>
+<h5 id="并发服务器"><a href="#并发服务器" class="headerlink" title="并发服务器"></a>并发服务器</h5><p>典型的并发服务器程序轮廓：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> pid;</span><br><span class="line"><span class="keyword">int</span> listenfd, connfd;</span><br><span class="line">listenfd = Socket(...);</span><br><span class="line">Bind(listenfd, ...);</span><br><span class="line">Listen(listenfd, LISTENQ);</span><br><span class="line"><span class="keyword">for</span>( ; ; ) &#123;</span><br><span class="line">  connfd = Accept(listenfd, ...);</span><br><span class="line">  <span class="keyword">if</span>((pid = Fork()) == <span class="number">0</span>) &#123;</span><br><span class="line">    Close(listenfd);</span><br><span class="line">    doit(connfd);</span><br><span class="line">    Close(connfd);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  Close(connfd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="getsockname和getpeername函数"><a href="#getsockname和getpeername函数" class="headerlink" title="getsockname和getpeername函数"></a>getsockname和getpeername函数</h5><p>返回与某个套接字关联的本地协议地址(getsockname)或者返回与某个套接字关联的外地协议地址(getpeername)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsockname</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *localaddr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpeername</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *peeraddr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>例子：获取套接字的地址族</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"unp.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sockfd_to_family</span><span class="params">(<span class="keyword">int</span> sockfd)</span> </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span> <span class="title">ss</span>;</span></span><br><span class="line">  <span class="keyword">socken_t</span> len;</span><br><span class="line">  len = <span class="keyword">sizeof</span>(ss);</span><br><span class="line">  <span class="keyword">if</span>(getsockname(sockfd, (SA *) &amp;ss, &amp;len) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span>(<span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">return</span>(ss.ss_family);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-03T04:50:02.143Z" itemprop="dateUpdated">2019-06-03 12:50:02</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/04/13/basic-tcp-socket-code/" target="_blank" rel="external">https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blog.zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UNIX网络编程/">UNIX网络编程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&title=《基本TCP套接字编程》 — Mose's blog&pic=https://blog.zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&title=《基本TCP套接字编程》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基本TCP套接字编程》 — Mose's blog&url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&via=https://blog.zhaoziwen.com.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/03/hello-world/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&title=《基本TCP套接字编程》 — Mose's blog&pic=https://blog.zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&title=《基本TCP套接字编程》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基本TCP套接字编程》 — Mose's blog&url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/&via=https://blog.zhaoziwen.com.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3aQW7DMAwEQP//0+mlhxaFnSVpBi4wOQWNI2tcQFKWPI749frxuv772ZU/P03en418bLzw8PDwBlO/HjqZ0PyhXH8rnzMeHh7eNi9fxJOJXi/xk3vl1+Dh4eE9h5dsHsnxt/r48PDw8P47r5oA5JNOSHh4eHhP4OVDJ3HDJLrNP705a8HDw8OLeXkV6TnvV+p7eHh4eOOqerUcdTaJyci9eX6PgIeHh7fA64ULvTW5HCIMomE8PDy8PV4+aK9Nqre45w/ozcPCw8PDW+AlB9kkVK0Wt3pRSF5IOxIxHh4e3pjXW+7zR5OM2fu0/D/Ew8PDW94eeoFFHv7OH1+zjoeHh4fX4vUW9GqD1KQ5YNR6hYeHh7fM60UM+RI/CSnya47eLoSHh4dXOy1HTU7JoBtxQ9J88OYaPDw8vA/yqs0E1YNv9UhdPaDj4eHh7fGSgfJp5ct6b7lvNmPh4eHh3cTrBbXz4lnv6FxubsDDw8Nb4OXISShQjWh7bQen98LDw8Nb4E0iifzYnQcK8+aw2xIXPDw8vD+8fLqTMlj+OKoPsRxG4OHh4X2EN2kmyNsL8jJYHnng4eHhbfN6P/h7YetkQ0pCEDw8PLxtXnTpuNg/CR2aoQYeHh7eAq96g95A801i8hc8PDy8DV5+bE2W42rzwWRzurlpAA8PD2/ASzaG6sE6n3o1UH6zaeHh4eGt8fJ2gV4ZrBcc9K7Bw8PD2+O9iq9JpFs9jve2qF+f4uHh4S3wJoWoaktWPq2kGWtU9MLDw8Mb86o/76uB7KTMdsPGgIeHh7fG6x1882CieoyuPprTb+Hh4eE9hldtKaiOWY0zyvU9PDw8vA/yricxmVAeVeQj4OHh4e3xel+eNGz1CmDljQQPDw9vgVf9wZ9vABN2dQu5ob6Hh4eH9/4uX0JcnHGXlUUhAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
