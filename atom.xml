@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Mose&#39;s blog</title>
   <icon>https://www.gravatar.com/avatar/f1266f6cd87918a7b6e13775e623d448</icon>
-  <subtitle>my subtitle</subtitle>
+  <subtitle>Think Deeper &amp; Work Harder</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.zhaoziwen.com.cn/"/>
