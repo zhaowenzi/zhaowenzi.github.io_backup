@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?b8febc6756d7e3980a068de85e5ba226"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Unique Binary Search Trees | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode">
+    <meta name="description" content="[LeetCode] 96. Given n, how many structurally unique BST’s that store values 1 … n ? Example: Input: 3 Output: 5 Explanation: Given n = 3, there are a total of 5 unique BST’s:  思路一递归： 空树和只有根结点时，也为BST">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unique Binary Search Trees">
+<meta property="og:url" content="https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/index.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="[LeetCode] 96. Given n, how many structurally unique BST’s that store values 1 … n ? Example: Input: 3 Output: 5 Explanation: Given n = 3, there are a total of 5 unique BST’s:  思路一递归： 空树和只有根结点时，也为BST">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-03T05:20:43.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unique Binary Search Trees">
+<meta name="twitter:description" content="[LeetCode] 96. Given n, how many structurally unique BST’s that store values 1 … n ? Example: Input: 3 Output: 5 Explanation: Given n = 3, there are a total of 5 unique BST’s:  思路一递归： 空树和只有根结点时，也为BST">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail">me@zhaoziwen</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Unique Binary Search Trees</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Unique Binary Search Trees</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-19T16:54:11.000Z" itemprop="datePublished" class="page-time">
+  2019-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/LeetCode/">LeetCode</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-unique-binary-search-trees" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Unique Binary Search Trees</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-20 00:54:11" datetime="2019-03-19T16:54:11.000Z" itemprop="datePublished">2019-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/LeetCode/">LeetCode</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>[LeetCode] 96. Given n, how many structurally unique BST’s that store values 1 … n ?</p>
+<p>Example:</p>
+<p>Input: 3</p>
+<p>Output: 5</p>
+<p>Explanation:</p>
+<p>Given n = 3, there are a total of 5 unique BST’s:</p>
+</blockquote>
+<p>思路一递归：</p>
+<p>空树和只有根结点时，也为BST。对于一点i，当其为根结点时，左子树的节点的个数为i-1（1, … , i-1），右子树的个数为n-i（i+1, … , n）。对于一个根来说，唯一二叉树的个数为左子树节点的个数乘以右子树的个数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">            sum+=numTrees(i<span class="number">-1</span>)*numTrees(n-i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>思路二动态规划：</p>
+<p>卡特兰数的递推公式：</p>
+<p>$$C_{0} = 1 \ and \  C_{n+1} = \sum_{i=0}^{n}C_{i}C_{n-i} \ for \ n\geq 0.$$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sumNode(n+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        sumNode[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        sumNode[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;++j)　　<span class="comment">//j符合条件时，最大为i-1，对照公式</span></span><br><span class="line">                sumNode[i]+=sumNode[j]*sumNode[i-j<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sumNode[n];  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-03T05:20:43.157Z" itemprop="dateUpdated">2019-06-03 13:20:43</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/2019/03/20/unique-binary-search-trees/" target="_blank" rel="external">https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blog.zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&title=《Unique Binary Search Trees》 — Mose's blog&pic=https://blog.zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&title=《Unique Binary Search Trees》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unique Binary Search Trees》 — Mose's blog&url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&via=https://blog.zhaoziwen.com.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/20/udp/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">用户数据报协议UDP详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/20/word-search/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Word Search 之 DFS</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&title=《Unique Binary Search Trees》 — Mose's blog&pic=https://blog.zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&title=《Unique Binary Search Trees》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unique Binary Search Trees》 — Mose's blog&url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/&via=https://blog.zhaoziwen.com.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3a0U7rMBAEUP7/p7mvSKjpzK4NXOnkqaJJ6mOk2Jndj4/4+PxyfP3Lq2+fz/l+PF/1/fPhAw8PD28x9Fc//Goo7bCSCTo7WXh4eHj3eO1wk4koBvE4nudl6Y0FDw8P7w/w2t3sfruMh4eH97/zko3v8wLQLir5dODh4eH9JC+/9WYZyIPg5NvDWQseHh7eJAeIhv4XPl+p7+Hh4eGtq+qzAn8byObRQz1aPDw8vAu8drs8i1PbglkbbbyZPjw8PLyjvLxInzdgPeNPBRDR5hsPDw/vAm9fmJ+1Um222slEHOs7wMPDw3vk5Vvh2aM/DyCShoPiWjw8PLyjvOSCth1qU5/aNCV8zOYDDw8Pr+TNYog8tM0nax9PvBknHh4e3gVe3nQ12wq3Ayrihn3HGR4eHl48wnzQbcLRtkzNim1vzsHDw8O7wGsvONViNQssDhTD8PDw8Na82aM53wrPFoYW9vI+eHh4eBd4eTHpVNNAG9HOoo2i2wsPDw9v3vVUlMFmbQdtU8JsCanfFfDw8PBKXhsW5JhZiHC2IIeHh4d3j3djk91uptslKppWPDw8vAu8/OE7m4g8njjVQDDsI8PDw8Nb8DY9CLMoNm/2ytu/osQaDw8Pb82bBRN5Yaxtw3r+P7TtC3h4eHhnee1r/+ZRnm+LZ01XRRkMDw8Pb83bBBNFeLrYOg+jCjw8PLxrvDx0mF3b4mdb+fpdAQ8PD2/NayOGTYVtE/jWdTw8PDy8Q7zP8tjceRYBr+6Jh4eHd4G3H27+k3kjQn7+xbURDw8P75E321K3jQKbM/OpxMPDw/tJXh4W5M0B+QZ3uBXOFwY8PDy8X+XNBpcvP+2C9OZ8PDw8vD/GayPaNlA4EDTj4eHhXePNHtl5FDv7dh8l4+Hh4d3gbV7421B11ppQhLab+h4eHh7ee94/9OpUufpc2hUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
