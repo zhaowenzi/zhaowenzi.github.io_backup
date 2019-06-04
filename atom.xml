@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.zhaoziwen.com.cn/"/>
-  <updated>2019-06-03T04:24:51.769Z</updated>
+  <updated>2019-06-04T03:42:28.100Z</updated>
   <id>https://blog.zhaoziwen.com.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>http重定向至https</title>
+    <link href="https://blog.zhaoziwen.com.cn/2019/06/04/http%E9%87%8D%E5%AE%9A%E5%90%91%E8%87%B3https/"/>
+    <id>https://blog.zhaoziwen.com.cn/2019/06/04/http重定向至https/</id>
+    <published>2019-06-04T03:39:00.000Z</published>
+    <updated>2019-06-04T03:42:28.100Z</updated>
+    
+    <content type="html"><![CDATA[<p>利用重定向将http请求全部转为https请求</p><p>其中nginx中的设置为</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    server_name     zhaoziwen.com.cn www.zhaoziwen.com.cn blog.zhaoziwen.com.cn;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root        /root/zhaowenzi.github.io;</span><br><span class="line">        index       index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    listen 443 ssl; # managed by Certbot</span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/blog.zhaoziwen.com.cn/fullchain.pem; # managed by Certbot</span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/blog.zhaoziwen.com.cn/privkey.pem; # managed by Certbot</span><br><span class="line">    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot</span><br><span class="line">    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    if ($host = blog.zhaoziwen.com.cn) &#123;</span><br><span class="line">        return 301 https://$host$request_uri;</span><br><span class="line">    &#125; # managed by Certbot</span><br><span class="line">    if ($host = zhaoziwen.com.cn) &#123;</span><br><span class="line">        return 301 https://$host$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line">    if ($host = www.zhaoziwen.com.cn) &#123;</span><br><span class="line">        return 301 https://$host$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    listen          80;</span><br><span class="line">    server_name     blog.zhaoziwen.com.cn www.zhaoziwen.com.cn zhaoziwen.com.cn;</span><br><span class="line">    return 404; # managed by Certbot</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;利用重定向将http请求全部转为https请求&lt;/p&gt;
+&lt;p&gt;其中nginx中的设置为&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="环境配置" scheme="https://blog.zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="nginx" scheme="https://blog.zhaoziwen.com.cn/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo博客搭建</title>
