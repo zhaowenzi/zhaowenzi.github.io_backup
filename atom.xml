@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.zhaoziwen.com.cn/"/>
-  <updated>2019-06-04T02:11:34.160Z</updated>
+  <updated>2019-06-03T04:24:51.769Z</updated>
   <id>https://blog.zhaoziwen.com.cn/</id>
   
   <author>
@@ -15,30 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/06/04/test/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/06/04/test/</id>
-    <published>2019-06-04T02:10:00.000Z</published>
-    <updated>2019-06-04T02:11:34.160Z</updated>
-    
-    <content type="html"><![CDATA[<p>我要测试</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;我要测试&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="测试" scheme="https://blog.zhaoziwen.com.cn/tags/%E6%B5%8B%E8%AF%95/"/>
-    
-  </entry>
   
   <entry>
     <title>hexo博客搭建</title>
