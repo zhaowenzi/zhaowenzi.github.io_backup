@@ -5,9 +5,9 @@
   <subtitle>Think Deeper &amp; Work Harder</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://blog.zhaoziwen.com.cn/"/>
+  <link href="https://zhaoziwen.com.cn/"/>
   <updated>2019-06-04T03:42:28.100Z</updated>
-  <id>https://blog.zhaoziwen.com.cn/</id>
+  <id>https://zhaoziwen.com.cn/</id>
   
   <author>
     <name>z2w</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>http重定向至https</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/06/04/http%E9%87%8D%E5%AE%9A%E5%90%91%E8%87%B3https/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/06/04/http重定向至https/</id>
+    <link href="https://zhaoziwen.com.cn/2019/06/04/http%E9%87%8D%E5%AE%9A%E5%90%91%E8%87%B3https/"/>
+    <id>https://zhaoziwen.com.cn/2019/06/04/http重定向至https/</id>
     <published>2019-06-04T03:39:00.000Z</published>
     <updated>2019-06-04T03:42:28.100Z</updated>
     
@@ -36,17 +36,17 @@
     
     </summary>
     
-      <category term="环境配置" scheme="https://blog.zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="https://zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="nginx" scheme="https://blog.zhaoziwen.com.cn/tags/nginx/"/>
+      <category term="nginx" scheme="https://zhaoziwen.com.cn/tags/nginx/"/>
     
   </entry>
   
   <entry>
     <title>hexo博客搭建</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/06/03/start-hexo/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/06/03/start-hexo/</id>
+    <link href="https://zhaoziwen.com.cn/2019/06/03/start-hexo/"/>
+    <id>https://zhaoziwen.com.cn/2019/06/03/start-hexo/</id>
     <published>2019-06-03T03:51:44.000Z</published>
     <updated>2019-06-03T04:24:51.769Z</updated>
     
@@ -62,17 +62,17 @@
     
     </summary>
     
-      <category term="博客" scheme="https://blog.zhaoziwen.com.cn/categories/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="https://zhaoziwen.com.cn/categories/%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="hexo" scheme="https://blog.zhaoziwen.com.cn/tags/hexo/"/>
+      <category term="hexo" scheme="https://zhaoziwen.com.cn/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/06/03/hello-world/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/06/03/hello-world/</id>
+    <link href="https://zhaoziwen.com.cn/2019/06/03/hello-world/"/>
+    <id>https://zhaoziwen.com.cn/2019/06/03/hello-world/</id>
     <published>2019-06-02T16:01:41.400Z</published>
     <updated>2019-06-02T16:01:41.400Z</updated>
     
@@ -92,8 +92,8 @@
   
   <entry>
     <title>堆及相关操作</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/05/26/heap/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/05/26/heap/</id>
+    <link href="https://zhaoziwen.com.cn/2019/05/26/heap/"/>
+    <id>https://zhaoziwen.com.cn/2019/05/26/heap/</id>
     <published>2019-05-26T14:23:57.000Z</published>
     <updated>2019-06-03T04:59:02.893Z</updated>
     
@@ -110,17 +110,17 @@
     
     </summary>
     
-      <category term="数据结构" scheme="https://blog.zhaoziwen.com.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://zhaoziwen.com.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="https://blog.zhaoziwen.com.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://zhaoziwen.com.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu环境挂载新硬盘</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/05/06/newdisk/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/05/06/newdisk/</id>
+    <link href="https://zhaoziwen.com.cn/2019/05/06/newdisk/"/>
+    <id>https://zhaoziwen.com.cn/2019/05/06/newdisk/</id>
     <published>2019-05-06T04:37:21.000Z</published>
     <updated>2019-06-03T05:08:59.807Z</updated>
     
@@ -135,17 +135,17 @@
     
     </summary>
     
-      <category term="环境配置" scheme="https://blog.zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="https://zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="ubuntu" scheme="https://blog.zhaoziwen.com.cn/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="https://zhaoziwen.com.cn/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>Permutations I &amp; II</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/24/permutations/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/24/permutations/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/24/permutations/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/24/permutations/</id>
     <published>2019-04-23T16:35:32.000Z</published>
     <updated>2019-06-03T05:10:09.740Z</updated>
     
@@ -163,17 +163,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Sum of Two Integers</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/23/sum-of-two-integers/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/23/sum-of-two-integers/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/23/sum-of-two-integers/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/23/sum-of-two-integers/</id>
     <published>2019-04-23T15:30:37.000Z</published>
     <updated>2019-06-03T05:12:26.518Z</updated>
     
@@ -190,17 +190,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Multiply Strings</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/22/multiply-strings/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/22/multiply-strings/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/22/multiply-strings/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/22/multiply-strings/</id>
     <published>2019-04-22T15:32:59.000Z</published>
     <updated>2019-06-03T05:06:23.261Z</updated>
     
@@ -217,17 +217,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>POSIX信号</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/19/posix-signal/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/19/posix-signal/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/19/posix-signal/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/19/posix-signal/</id>
     <published>2019-04-18T16:17:25.000Z</published>
     <updated>2019-06-03T05:10:59.733Z</updated>
     
@@ -243,19 +243,19 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="UNIX网络编程" scheme="https://blog.zhaoziwen.com.cn/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="UNIX网络编程" scheme="https://zhaoziwen.com.cn/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>Lowest Common Ancestor of a Binary Tree</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/16/lowest-common-ancestor-of-a-binary-tree/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/16/lowest-common-ancestor-of-a-binary-tree/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/16/lowest-common-ancestor-of-a-binary-tree/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/16/lowest-common-ancestor-of-a-binary-tree/</id>
     <published>2019-04-15T16:27:43.000Z</published>
     <updated>2019-06-03T05:02:29.373Z</updated>
     
@@ -272,17 +272,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>基本TCP套接字编程</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/13/basic-tcp-socket-code/</id>
     <published>2019-04-13T11:51:39.000Z</published>
     <updated>2019-06-03T04:50:02.143Z</updated>
     
@@ -297,21 +297,21 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="tcp" scheme="https://blog.zhaoziwen.com.cn/tags/tcp/"/>
+      <category term="tcp" scheme="https://zhaoziwen.com.cn/tags/tcp/"/>
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="UNIX网络编程" scheme="https://blog.zhaoziwen.com.cn/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="UNIX网络编程" scheme="https://zhaoziwen.com.cn/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>Partition Equal Subset Sum</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/04/partition-equal-subset-sum/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/04/partition-equal-subset-sum/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/04/partition-equal-subset-sum/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/04/partition-equal-subset-sum/</id>
     <published>2019-04-03T17:05:06.000Z</published>
     <updated>2019-06-03T05:09:40.394Z</updated>
     
@@ -327,17 +327,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Burst Balloons</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/02/burst-balloons/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/02/burst-balloons/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/02/burst-balloons/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/02/burst-balloons/</id>
     <published>2019-04-02T15:48:10.000Z</published>
     <updated>2019-06-03T04:55:20.072Z</updated>
     
@@ -354,17 +354,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>传输控制协议TCP概述</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/02/tcp/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/02/tcp/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/02/tcp/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/02/tcp/</id>
     <published>2019-04-01T17:08:31.000Z</published>
     <updated>2019-06-03T05:16:29.180Z</updated>
     
@@ -380,19 +380,19 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TCP" scheme="https://blog.zhaoziwen.com.cn/tags/TCP/"/>
+      <category term="TCP" scheme="https://zhaoziwen.com.cn/tags/TCP/"/>
     
   </entry>
   
   <entry>
     <title>Best Time to Buy and Sell Stock with Cooldown</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/04/01/best-time-to-buy-and-sell-stock-with-cooldown/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/04/01/best-time-to-buy-and-sell-stock-with-cooldown/</id>
+    <link href="https://zhaoziwen.com.cn/2019/04/01/best-time-to-buy-and-sell-stock-with-cooldown/"/>
+    <id>https://zhaoziwen.com.cn/2019/04/01/best-time-to-buy-and-sell-stock-with-cooldown/</id>
     <published>2019-04-01T14:57:33.000Z</published>
     <updated>2019-06-03T04:53:13.655Z</updated>
     
@@ -409,17 +409,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>字典树(前缀树) Trie Tree(Prefix Tree)</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/28/trie-tree/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/28/trie-tree/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/28/trie-tree/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/28/trie-tree/</id>
     <published>2019-03-27T16:27:52.000Z</published>
     <updated>2019-06-03T05:18:22.570Z</updated>
     
@@ -435,17 +435,17 @@
     
     </summary>
     
-      <category term="数据结构" scheme="https://blog.zhaoziwen.com.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://zhaoziwen.com.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="https://blog.zhaoziwen.com.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://zhaoziwen.com.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>Maximal Square</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/27/maximal-square/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/27/maximal-square/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/27/maximal-square/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/27/maximal-square/</id>
     <published>2019-03-26T17:07:04.000Z</published>
     <updated>2019-06-03T05:05:04.400Z</updated>
     
@@ -461,17 +461,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Course Schedule</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/26/course-schedule/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/26/course-schedule/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/26/course-schedule/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/26/course-schedule/</id>
     <published>2019-03-25T16:32:46.000Z</published>
     <updated>2019-06-03T04:56:20.361Z</updated>
     
@@ -489,17 +489,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu初始化配置流程</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/25/ubuntu-start/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/25/ubuntu-start/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/25/ubuntu-start/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/25/ubuntu-start/</id>
     <published>2019-03-24T16:02:12.000Z</published>
     <updated>2019-06-03T05:18:07.798Z</updated>
     
@@ -518,17 +518,17 @@
     
     </summary>
     
-      <category term="环境配置" scheme="https://blog.zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="https://zhaoziwen.com.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="ubuntu" scheme="https://blog.zhaoziwen.com.cn/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="https://zhaoziwen.com.cn/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>Largest Rectangle in Histogram &amp; Maximal Rectangle</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/21/LRIH-and-MR/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/21/LRIH-and-MR/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/21/LRIH-and-MR/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/21/LRIH-and-MR/</id>
     <published>2019-03-20T17:08:23.000Z</published>
     <updated>2019-06-03T05:04:27.795Z</updated>
     
@@ -546,17 +546,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>用户数据报协议UDP详解</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/20/udp/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/20/udp/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/20/udp/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/20/udp/</id>
     <published>2019-03-19T17:38:21.000Z</published>
     <updated>2019-06-03T05:19:42.944Z</updated>
     
@@ -573,19 +573,19 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="计算机网络" scheme="https://blog.zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="计算机网络" scheme="https://zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="UDP" scheme="https://blog.zhaoziwen.com.cn/tags/UDP/"/>
+      <category term="UDP" scheme="https://zhaoziwen.com.cn/tags/UDP/"/>
     
   </entry>
   
   <entry>
     <title>Unique Binary Search Trees</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/20/unique-binary-search-trees/</id>
     <published>2019-03-19T16:54:11.000Z</published>
     <updated>2019-06-03T05:20:43.157Z</updated>
     
@@ -604,17 +604,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Word Search 之 DFS</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/20/word-search/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/20/word-search/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/20/word-search/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/20/word-search/</id>
     <published>2019-03-19T16:36:42.000Z</published>
     <updated>2019-06-03T05:21:18.039Z</updated>
     
@@ -632,17 +632,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Edit Distance 编辑距离</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/19/edit-distance/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/19/edit-distance/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/19/edit-distance/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/19/edit-distance/</id>
     <published>2019-03-18T17:01:23.000Z</published>
     <updated>2019-06-03T04:57:01.594Z</updated>
     
@@ -659,17 +659,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Longest_valid_parentheses</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/13/longest-valid-parentheses/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/13/longest-valid-parentheses/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/13/longest-valid-parentheses/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/13/longest-valid-parentheses/</id>
     <published>2019-03-13T15:58:12.000Z</published>
     <updated>2019-06-03T04:59:59.268Z</updated>
     
@@ -688,17 +688,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>递归之生成括号</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/12/generate-parentheses/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/12/generate-parentheses/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/12/generate-parentheses/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/12/generate-parentheses/</id>
     <published>2019-03-12T15:48:48.000Z</published>
     <updated>2019-06-03T04:57:52.081Z</updated>
     
@@ -715,17 +715,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Median_of_two_sorted_arrays</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/11/Median-of-two-sorted-arrays/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/11/Median-of-two-sorted-arrays/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/11/Median-of-two-sorted-arrays/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/11/Median-of-two-sorted-arrays/</id>
     <published>2019-03-11T13:51:00.000Z</published>
     <updated>2019-06-03T05:05:45.337Z</updated>
     
@@ -740,17 +740,17 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
   <entry>
     <title>String_rotate</title>
-    <link href="https://blog.zhaoziwen.com.cn/2019/03/10/string-rotate/"/>
-    <id>https://blog.zhaoziwen.com.cn/2019/03/10/string-rotate/</id>
+    <link href="https://zhaoziwen.com.cn/2019/03/10/string-rotate/"/>
+    <id>https://zhaoziwen.com.cn/2019/03/10/string-rotate/</id>
     <published>2019-03-10T07:39:15.000Z</published>
     <updated>2019-06-03T05:11:51.892Z</updated>
     
@@ -765,10 +765,10 @@
     
     </summary>
     
-      <category term="LeetCode" scheme="https://blog.zhaoziwen.com.cn/categories/LeetCode/"/>
+      <category term="LeetCode" scheme="https://zhaoziwen.com.cn/categories/LeetCode/"/>
     
     
-      <category term="leetcode" scheme="https://blog.zhaoziwen.com.cn/tags/leetcode/"/>
+      <category term="leetcode" scheme="https://zhaoziwen.com.cn/tags/leetcode/"/>
     
   </entry>
   
