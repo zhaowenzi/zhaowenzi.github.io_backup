@@ -300,11 +300,11 @@
       <category term="计算机网络" scheme="https://zhaoziwen.com.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="tcp" scheme="https://zhaoziwen.com.cn/tags/tcp/"/>
-    
       <category term="计算机网络" scheme="https://zhaoziwen.com.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
       <category term="UNIX网络编程" scheme="https://zhaoziwen.com.cn/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="tcp" scheme="https://zhaoziwen.com.cn/tags/tcp/"/>
     
   </entry>
   
