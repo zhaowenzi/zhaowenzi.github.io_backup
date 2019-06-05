@@ -68,7 +68,7 @@
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">z2w</h5>
-          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail">me@zhaoziwen</a>
+          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail" rel="external nofollow noopener noreferrer" target="_blank">me@zhaoziwen</a>
         </hgroup>
       </div>
     </div>
@@ -104,14 +104,14 @@
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/zhaowenzi" target="_blank">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/FTC0003" target="_blank">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
                 <i class="icon icon-lg icon-weibo"></i>
                 Weibo
               </a>
@@ -242,7 +242,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximalRectangle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; &gt; &amp;matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; height;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.size(); ++i) &#123;</span><br><span class="line">            height.resize(matrix[i].size());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[i].size(); ++j) &#123;</span><br><span class="line">                height[j] = matrix[i][j] == <span class="string">'0'</span> ? <span class="number">0</span> : (<span class="number">1</span> + height[j]);</span><br><span class="line">            &#125;</span><br><span class="line">            res = max(res, largestRectangleArea(height));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        height.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.empty() || height[s.top()] &lt;= height[i]) s.push(i);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = s.top();</span><br><span class="line">                s.pop();</span><br><span class="line">                res = max(res, height[tmp] * (s.empty() ? i : (i - s.top() - <span class="number">1</span>)));</span><br><span class="line">                --i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>其中，这题仍然可以用DP的方法，不过看起来比较复杂，所以先暂时留着，附上链接，之后总结一下DP的流程只有再总结一下。</p>
-<p><a href="https://blog.csdn.net/maxiaotiaoti/article/details/62230381" target="_blank" rel="noopener">DP思路</a></p>
+<p><a href="https://blog.csdn.net/maxiaotiaoti/article/details/62230381" rel="external nofollow noopener noreferrer" target="_blank">DP思路</a></p>
 
         </div>
 
@@ -283,7 +283,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -293,22 +293,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f63981d1.html&via=https://zhaoziwen.com.cn" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f63981d1.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -418,16 +418,16 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
         <p><span>z2w &copy; 2018 - 2019</span>
             <span>
                 
-                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备16110253号-2</a><br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
             </span>
         </p>
     </div>
@@ -442,7 +442,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -452,22 +452,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f63981d1.html&title=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f63981d1.html&via=https://zhaoziwen.com.cn" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Largest Rectangle in Histogram & Maximal Rectangle》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f63981d1.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f63981d1.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>

@@ -65,7 +65,7 @@
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">z2w</h5>
-          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail">me@zhaoziwen</a>
+          <a href="mailto:me@zhaoziwen" title="me@zhaoziwen" class="mail" rel="external nofollow noopener noreferrer" target="_blank">me@zhaoziwen</a>
         </hgroup>
       </div>
     </div>
@@ -101,14 +101,14 @@
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/zhaowenzi" target="_blank">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/FTC0003" target="_blank">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
                 <i class="icon icon-lg icon-weibo"></i>
                 Weibo
               </a>
@@ -215,7 +215,7 @@
 
 <h4 id="二、转换中文及安装搜狗输入法"><a href="#二、转换中文及安装搜狗输入法" class="headerlink" title="二、转换中文及安装搜狗输入法"></a>二、转换中文及安装搜狗输入法</h4><p>1、在Language Support中增加汉语，然后选择输入法系统为fcitx</p>
 <p>2、重启系统</p>
-<p>3、<a href="http://pinyin.sogou.com/linux" target="_blank" rel="noopener">打开官网</a>，下载安装包</p>
+<p>3、<a href="http://pinyin.sogou.com/linux" rel="external nofollow noopener noreferrer" target="_blank">打开官网</a>，下载安装包</p>
 <p>4、终端运行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i sogoupinyin_xxxx.deb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 若出错则运行下面的命令</span></span><br><span class="line">sudo apt-get -f install</span><br></pre></td></tr></table></figure>
 
@@ -223,7 +223,7 @@
 <h4 id="三、为root账户设置密码已经切换至root账户"><a href="#三、为root账户设置密码已经切换至root账户" class="headerlink" title="三、为root账户设置密码已经切换至root账户"></a>三、为root账户设置密码已经切换至root账户</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root #为root账户设置密码</span><br><span class="line">su root #切换至root账户</span><br></pre></td></tr></table></figure>
 
 <h4 id="四、安装Anaconda"><a href="#四、安装Anaconda" class="headerlink" title="四、安装Anaconda"></a>四、安装Anaconda</h4><p>1、下载安装包</p>
-<p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">历史版本</a>，该网页包含所有历史版本，其实5.2.0对应python3.6，5.3.0对应python3.5。</p>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" rel="external nofollow noopener noreferrer" target="_blank">历史版本</a>，该网页包含所有历史版本，其实5.2.0对应python3.6，5.3.0对应python3.5。</p>
 <p>2、安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Downloads</span><br><span class="line">sh Anaconda3-xxx.sh</span><br></pre></td></tr></table></figure>
 
@@ -364,16 +364,16 @@
 </tbody></table>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装依赖（是否有用及必须未验证）</span></span><br><span class="line">sudo apt-get install mesa-common-dev</span><br><span class="line">sudo apt-get install freeglut3-dev</span><br></pre></td></tr></table></figure>
 
-<p>到<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">NVIDIA官网</a>下载相应的CUDA版本的run文件</p>
+<p>到<a href="https://developer.nvidia.com/cuda-toolkit-archive" rel="external nofollow noopener noreferrer" target="_blank">NVIDIA官网</a>下载相应的CUDA版本的run文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cudaXXXXXX.run</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### Note: 在询问是否安装NVIDIA驱动的时候选择no，其他默认</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">修改环境变量</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line">export PATH=/usr/local/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 验证cuda成功安装（可选）</span></span><br><span class="line">cd /usr/local/cuda-8.0/samples</span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有make，先安装make</span></span><br><span class="line">sudo apt-get install cmake</span><br><span class="line">sudo make -j</span><br><span class="line">cd ./bin/x86_64/linux/release</span><br><span class="line">./deviceQuery </span><br><span class="line"><span class="meta">#</span><span class="bash">如果结果中显示了NVIDIA显卡的相关信息，最后能看到Result = PASS就算安装成功</span></span><br></pre></td></tr></table></figure>
 
 <p>3、安装cuDNN</p>
-<p>登录<a href="https://developer.nvidia.com/rdp/form/cudnn-download-survey" target="_blank" rel="noopener">NVIDIA账号</a>下载对应cuDNN版本（cuDNN vX.0 Library for xxx）</p>
+<p>登录<a href="https://developer.nvidia.com/rdp/form/cudnn-download-survey" rel="external nofollow noopener noreferrer" target="_blank">NVIDIA账号</a>下载对应cuDNN版本（cuDNN vX.0 Library for xxx）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 解压文件</span></span><br><span class="line">tar -zxvf cudnn-xxx.tgz</span><br><span class="line">cd cuda</span><br><span class="line">sudo cp /include/cudnn.h /usr/local/cudaxxx/include/</span><br><span class="line">cd ../lib64</span><br><span class="line">sudo cp lib* /usr/local/cudaxxx/lib64</span><br><span class="line"></span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h </span><br><span class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn*</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新软连接</span></span><br><span class="line">cd /usr/local/cuda/lib64/ </span><br><span class="line">sudo rm -rf libcudnn.so libcudnn.so.7   #删除原有动态文件，版本号注意变化，可在cudnn的lib64文件夹中查看   </span><br><span class="line">sudo ln -s libcudnn.so.7.0.2 libcudnn.so.7  #生成软衔接（注意这里要和自己下载的cudnn版本对应，可以在/usr/local/cuda/lib64下查看自己libcudnn的版本）</span><br><span class="line">sudo ln -s libcudnn.so.7 libcudnn.so #生成软链接</span><br><span class="line">sudo ldconfig -v #立刻生效</span><br></pre></td></tr></table></figure>
 
-<h4 id="九、相关资源"><a href="#九、相关资源" class="headerlink" title="九、相关资源"></a>九、相关资源</h4><p><a href="https://www.jianshu.com/p/893d622d1b5a" target="_blank" rel="noopener">搭建深度学习平台</a></p>
+<h4 id="九、相关资源"><a href="#九、相关资源" class="headerlink" title="九、相关资源"></a>九、相关资源</h4><p><a href="https://www.jianshu.com/p/893d622d1b5a" rel="external nofollow noopener noreferrer" target="_blank">搭建深度学习平台</a></p>
 
         </div>
 
@@ -414,7 +414,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -424,22 +424,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu初始化配置流程》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/360ed1a2.html&via=https://zhaoziwen.com.cn" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu初始化配置流程》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/360ed1a2.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -549,16 +549,16 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
         <p><span>z2w &copy; 2018 - 2019</span>
             <span>
                 
-                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备16110253号-2</a><br>
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
             </span>
         </p>
     </div>
@@ -573,7 +573,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -583,22 +583,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&source=This is my personal blog!" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/360ed1a2.html&title=《Ubuntu初始化配置流程》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu初始化配置流程》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/360ed1a2.html&via=https://zhaoziwen.com.cn" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu初始化配置流程》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/360ed1a2.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/360ed1a2.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
