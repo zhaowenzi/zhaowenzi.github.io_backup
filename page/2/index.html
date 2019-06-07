@@ -164,6 +164,59 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-posix-signal" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-04-19 00:17:25" datetime="2019-04-18T16:17:25.000Z" itemprop="datePublished">2019-04-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机网络/">计算机网络</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/archives/bd1d3b91.html">POSIX信号</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        在服务器子进程终止时，给父进程发送一个SIGCHLD信号。由于父进程未加处理，子进程进入僵死状态。
+POSIX信号处理信号就是告知某个进程发生了某个事件的通知，有时也成为软件中断(interrupt)
+信号可以：
+
+由一个进程发送给另一个进程
+由内核发送给某个进程
+
+每一个信号都有一个与之关联的处置(disposition)，也称为行为(action)。我们通过调用sigaction函数来设...
+    
+
+        <a href="/archives/bd1d3b91.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UNIX网络编程/">UNIX网络编程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-lowest-common-ancestor-of-a-binary-tree" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -601,63 +654,6 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-ubuntu-start" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-25 00:02:12" datetime="2019-03-24T16:02:12.000Z" itemprop="datePublished">2019-03-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/环境配置/">环境配置</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/archives/360ed1a2.html">Ubuntu初始化配置流程</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        以下记录一下Ubuntu的配置流程，持续更新
-
-环境：ubuntu 16.04.6 Desktop
-
-一、更新apt源1、源文件备份
-1sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-
-2、编辑源列表文件
-1sudo vim /etc/apt/sources.list
-
-3、将原来的列表删除，添加如下内容
-123456789# ...
-    
-
-        <a href="/archives/360ed1a2.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 
     </div>
     
