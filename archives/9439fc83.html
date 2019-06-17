@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?74de4378fdea19ed4f59264fe4bd6716"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>B树 | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树 性质 每个结点 x 有下面属性  x.n，当前存储在结点x中的关键字个数 x.n 个关键字本身$x.key_{1}$，$x.key_{2}$，$x.key_{3}$，…，$x.key_{x.n}$以非降序存放 x.leaf，一个布尔值，如果x是叶节点，则为TRUE；如果x是内部结点，则为FALSE   每个内部结点x还包含">
+<meta name="keywords" content="blog programmer code leetcode technology computer science">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B树">
+<meta property="og:url" content="https://zhaoziwen.com.cn/archives/9439fc83.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树 性质 每个结点 x 有下面属性  x.n，当前存储在结点x中的关键字个数 x.n 个关键字本身$x.key_{1}$，$x.key_{2}$，$x.key_{3}$，…，$x.key_{x.n}$以非降序存放 x.leaf，一个布尔值，如果x是叶节点，则为TRUE；如果x是内部结点，则为FALSE   每个内部结点x还包含">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-17T11:04:30.707Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B树">
+<meta name="twitter:description" content="B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树 性质 每个结点 x 有下面属性  x.n，当前存储在结点x中的关键字个数 x.n 个关键字本身$x.key_{1}$，$x.key_{2}$，$x.key_{3}$，…，$x.key_{x.n}$以非降序存放 x.leaf，一个布尔值，如果x是叶节点，则为TRUE；如果x是内部结点，则为FALSE   每个内部结点x还包含">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen.com.cn" title="me@zhaoziwen.com.cn" class="mail">me@zhaoziwen.com.cn</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">B树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">B树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-17T11:01:58.000Z" itemprop="datePublished" class="page-time">
+  2019-06-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性质"><span class="post-toc-number">1.</span> <span class="post-toc-text">性质</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-b-tree" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">B树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-17 19:01:58" datetime="2019-06-17T11:01:58.000Z" itemprop="datePublished">2019-06-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li><p>每个结点 x 有下面属性</p>
+<ol>
+<li>x.n，当前存储在结点x中的关键字个数</li>
+<li>x.n 个关键字本身$x.key_{1}$，$x.key_{2}$，$x.key_{3}$，…，$x.key_{x.n}$以非降序存放</li>
+<li>x.leaf，一个布尔值，如果x是叶节点，则为TRUE；如果x是内部结点，则为FALSE</li>
+</ol>
+</li>
+<li><p>每个内部结点x还包含 x.n+1 个指向其孩子的指针$x.c_{1}$，$x.c_{2}$，… ，$x.c_{n+1}$。叶结点没有孩子</p>
+</li>
+<li><p>关键字$x.key_{i}$对存储在各子树中的关键字范围加以分割：如果$k_{i}$为任意一个存储在以$x.c_{i}$为根的子树中的关键字，那么</p>
+<p>$$k_{1} ≤ x.key_{1} ≤ k_{2} ≤ x.key_{2} ≤ … ≤ x.key_{x.n} ≤ k_{x.n+1}$$</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-17T11:04:30.707Z" itemprop="dateUpdated">2019-06-17 19:04:30</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/archives/9439fc83.html" target="_blank" rel="external">https://zhaoziwen.com.cn/archives/9439fc83.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/9439fc83.html&title=《B树》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/9439fc83.html&title=《B树》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/9439fc83.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《B树》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/9439fc83.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/9439fc83.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/archives/4a7356f9.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">2-3查找树与红黑树（Java）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/9439fc83.html&title=《B树》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/9439fc83.html&title=《B树》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/9439fc83.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《B树》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/9439fc83.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/9439fc83.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aMW7DMAwF0Nz/0i7QrUCtfpLuYOlpKhJX4fNAiKQ+n3hd3+vuk7tv1/919/zdMw8sDAyM1zKu5UoCnXy7filJbBgYGOcw1kk2T6nrTFhN7klsGBgYGOsUmRzp1oDkVzAwMDCqCXd+iEwWBgYGRq+IrZamSbLOU/BjtTgGBsYLGZPC8r///sf5BgYGxksY12BVG3PrgUGeZH/ZAQMDY2tGr3Hfa5NVS9a8oMXAwDiBkTfXJofFeSMvevUYGBjbMSYXIPLQJ8PO6EkMDIytGZMrF0kiTnaejBwwMDBOYOQlYi/oahMtT9kYGBjnMJ66BJZ/nlzCqMaDgYGxN6M3qqxi8jsSvZIYAwPjBEZ1MDAZRlbbdtELwsDAOICRh5W30qqhJB3B290wMDAOYCSFZV6gVoPrXemIJp8YGBhbMCah98KdXyO7fRIDA2NrRm9w2GvPPTtUwMDAOIGRtOCbiW+8TwGJgYGxNWN0O6M1mMz3LO+AgYFxAKPaRKuGO2r9V9ttGBgYWzN6VyWeGnBORgsYGBh7MybUdTssf0G9Q2cZiYGB8ULGVVxJMp2Upvkr+PEJBgbG1oze9Yjq8bHayKvugIGBcQIjSbLVhlqSdqvF7TpxY2BgnMBY/1h+GSIJvddE++O3MDAwMIpBzE+mSaGLgYGBUd2o2jh7eHiJgYFxACO/7FUNvfq/zTEABgbG1oxJUs4PfL303WvGYWBgbMT4AvtX0T/9ACYNAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

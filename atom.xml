@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoziwen.com.cn/"/>
-  <updated>2019-06-17T07:22:08.046Z</updated>
+  <updated>2019-06-17T11:04:30.707Z</updated>
   <id>https://zhaoziwen.com.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>B树</title>
+    <link href="https://zhaoziwen.com.cn/archives/9439fc83.html"/>
+    <id>https://zhaoziwen.com.cn/archives/9439fc83.html</id>
+    <published>2019-06-17T11:01:58.000Z</published>
+    <updated>2019-06-17T11:04:30.707Z</updated>
+    
+    <content type="html"><![CDATA[<p>B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树</p><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol><li><p>每个结点 x 有下面属性</p><ol><li>x.n，当前存储在结点x中的关键字个数</li><li>x.n 个关键字本身$x.key_{1}$，$x.key_{2}$，$x.key_{3}$，…，$x.key_{x.n}$以非降序存放</li><li>x.leaf，一个布尔值，如果x是叶节点，则为TRUE；如果x是内部结点，则为FALSE</li></ol></li><li><p>每个内部结点x还包含 x.n+1 个指向其孩子的指针$x.c_{1}$，$x.c_{2}$，… ，$x.c_{n+1}$。叶结点没有孩子</p></li><li><p>关键字$x.key_{i}$对存储在各子树中的关键字范围加以分割：如果$k_{i}$为任意一个存储在以$x.c_{i}$为根的子树中的关键字，那么</p><p>$$k_{1} ≤ x.key_{1} ≤ k_{2} ≤ x.key_{2} ≤ … ≤ x.key_{x.n} ≤ k_{x.n+1}$$</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;B树，又称B-树，是一种是用于外查找（在磁盘或其他存储设备中查找）的多叉树&lt;/p&gt;
+&lt;h3 id=&quot;性质&quot;&gt;&lt;a href=&quot;#性质&quot; class=&quot;headerlink&quot; title=&quot;性质&quot;&gt;&lt;/a&gt;性质&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;每个结点 x 有下面属性&lt;/p&gt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>2-3查找树与红黑树（Java）</title>
