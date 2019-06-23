@@ -52,7 +52,7 @@
 <meta property="og:description" content="UNIX体系结构从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。 内核的接口被称为系统调用（system call）。 登录登录名登录UNIX系统是一次键入登录名和口令。口令文件（/etc/passwd）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及sh">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190623122422.png">
-<meta property="og:updated_time" content="2019-06-23T04:34:38.049Z">
+<meta property="og:updated_time" content="2019-06-23T04:37:26.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE 第一章 UNIX基础知识">
 <meta name="twitter:description" content="UNIX体系结构从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。 内核的接口被称为系统调用（system call）。 登录登录名登录UNIX系统是一次键入登录名和口令。口令文件（/etc/passwd）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及sh">
@@ -310,7 +310,7 @@
 <h4 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h4><p>perror的msg参数是个指针，perror就可以改变msg指向的字符串。然而使用限定const限制了perror不能修改msg指针指向的字符串。</p>
 <p>而对于strerror，其错误号参数是整数类型，并且C是按值传递参数，所有strerror函数修改不了函数外的值，所以没有必要使用const限定。</p>
 <h4 id="1-4"><a href="#1-4" class="headerlink" title="1.4"></a>1.4</h4><p>2038年。将time_t数据类型定义为64位整型。</p>
-<h4 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h4><p>$$天t = 2^{32} / (60 * 60 * 24 * 100) = 248.551348天$$</p>
+<h4 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h4><p>$$t = 2^{32} / (60 * 60 * 24 * 100) = 248.551348天$$</p>
 
         </div>
 
@@ -319,7 +319,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-06-23T04:34:38.049Z" itemprop="dateUpdated">2019-06-23 12:34:38</time>
+    最后更新时间：<time datetime="2019-06-23T04:37:26.192Z" itemprop="dateUpdated">2019-06-23 12:37:26</time>
 </span><br>
 
 
