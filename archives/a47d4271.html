@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?74de4378fdea19ed4f59264fe4bd6716"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>APUE 第一章 UNIX基础知识 | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="apue">
+    <meta name="description" content="UNIX体系结构从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。 内核的接口被称为系统调用（system call）。 登录登录名登录UNIX系统是一次键入登录名和口令。口令文件（/etc/passwd）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及sh">
+<meta name="keywords" content="apue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APUE 第一章 UNIX基础知识">
+<meta property="og:url" content="https://zhaoziwen.com.cn/archives/a47d4271.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="UNIX体系结构从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。 内核的接口被称为系统调用（system call）。 登录登录名登录UNIX系统是一次键入登录名和口令。口令文件（/etc/passwd）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及sh">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190623122422.png">
+<meta property="og:updated_time" content="2019-06-23T04:34:38.049Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APUE 第一章 UNIX基础知识">
+<meta name="twitter:description" content="UNIX体系结构从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。 内核的接口被称为系统调用（system call）。 登录登录名登录UNIX系统是一次键入登录名和口令。口令文件（/etc/passwd）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及sh">
+<meta name="twitter:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190623122422.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen.com.cn" title="me@zhaoziwen.com.cn" class="mail">me@zhaoziwen.com.cn</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">APUE 第一章 UNIX基础知识</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">APUE 第一章 UNIX基础知识</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-23T04:32:51.000Z" itemprop="datePublished" class="page-time">
+  2019-06-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UNIX环境高级编程/">UNIX环境高级编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UNIX体系结构"><span class="post-toc-number">1.</span> <span class="post-toc-text">UNIX体系结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#登录"><span class="post-toc-number">2.</span> <span class="post-toc-text">登录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#登录名"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">登录名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#shell"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">shell</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件和目录"><span class="post-toc-number">3.</span> <span class="post-toc-text">文件和目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件系统"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">文件系统</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件名"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">文件名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#路径名"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">路径名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#工作目录"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">工作目录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#起始目录"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">起始目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入和输出"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入和输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件描述符"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">文件描述符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#标准输入、标准输出和标准错误"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">标准输入、标准输出和标准错误</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#不带缓冲的I-O"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">不带缓冲的I/O</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#标准I-O"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">标准I/O</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序和进程"><span class="post-toc-number">5.</span> <span class="post-toc-text">程序和进程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#程序"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">程序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#进程和进程ID"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">进程和进程ID</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#进程控制"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">进程控制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#线程和线程ID"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">线程和线程ID</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#出错处理"><span class="post-toc-number">6.</span> <span class="post-toc-text">出错处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户标识"><span class="post-toc-number">7.</span> <span class="post-toc-text">用户标识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户ID"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">用户ID</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#组ID"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">组ID</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#附属组ID"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">附属组ID</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#信号"><span class="post-toc-number">8.</span> <span class="post-toc-text">信号</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#时间值"><span class="post-toc-number">9.</span> <span class="post-toc-text">时间值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统调用和库函数"><span class="post-toc-number">10.</span> <span class="post-toc-text">系统调用和库函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#习题答案"><span class="post-toc-number">11.</span> <span class="post-toc-text">习题答案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">1.1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2"><span class="post-toc-number">11.2.</span> <span class="post-toc-text">1.2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3"><span class="post-toc-number">11.3.</span> <span class="post-toc-text">1.3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4"><span class="post-toc-number">11.4.</span> <span class="post-toc-text">1.4</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5"><span class="post-toc-number">11.5.</span> <span class="post-toc-text">1.5</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-apue-1" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">APUE 第一章 UNIX基础知识</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-23 12:32:51" datetime="2019-06-23T04:32:51.000Z" itemprop="datePublished">2019-06-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UNIX环境高级编程/">UNIX环境高级编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="UNIX体系结构"><a href="#UNIX体系结构" class="headerlink" title="UNIX体系结构"></a>UNIX体系结构</h3><p>从严格意义上说，可以将操作系统定义为一种叫做内核（kernel）的软件，它控制计算机资源，提供程序运行环境。</p>
+<p>内核的接口被称为<em>系统调用（system call）</em>。</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><h4 id="登录名"><a href="#登录名" class="headerlink" title="登录名"></a>登录名</h4><p>登录UNIX系统是一次键入登录名和口令。口令文件（<code>/etc/passwd</code>）中的登录项由7个冒号分隔的字段组成，依次为：登录名、加密口令（转移到另一个文件中）、数字用户ID、数字组ID、注释字段、起始目录以及shell程序</p>
+<p><code>sar:x:205:105:Stephen Rago:/home/sar:/bin/ksh</code></p>
+<h4 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h4><p>shell是一个命令解释器，它读取用户输入，然后执行脚本。</p>
+<h3 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h3><h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h4><p>UNIX文件系统是目录和文件的一种层次结构，所有东西的七点都是称为根（root）的目录，这个目录的名称是一个字符<code>/</code>。</p>
+<p>目录是一个包含目录项的文件。</p>
+<h4 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h4><p>斜线<code>/</code>和空字符不能出现在文件名中。斜线用来分隔构成路径名的各文件夹，空字符用来终止一个路径名。</p>
+<p>创建新目录是会自动创建两个文件名：<code>.</code>和<code>..</code>。点指向当前目录，点点指向父目录。</p>
+<h4 id="路径名"><a href="#路径名" class="headerlink" title="路径名"></a>路径名</h4><p>以斜线开头的路径称为<em>绝对路径名（absolute pathname）</em>，否则称为<em>相对路径名（relative pathname）</em>。</p>
+<p>下面的代码实现了<code>ls</code>的功能</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) &#123;</span><br><span class="line">    DIR *dp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> *<span class="title">dirp</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>)</span><br><span class="line">        err_quit(<span class="string">"usage: ls directory_name"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ((dp = opendir(argv[<span class="number">1</span>])) == <span class="literal">NULL</span>)</span><br><span class="line">        err_sys(<span class="string">"can't open %s"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">while</span> ((dirp = readdir(dp)) != <span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, dirp-&gt;d_name);</span><br><span class="line">        </span><br><span class="line">    closedir(dp);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="工作目录"><a href="#工作目录" class="headerlink" title="工作目录"></a>工作目录</h4><p>每个进程都有一个工作目录（working directory，又称为当前工作目录）。所有相对路径名都是从工作目录开始解释。进程可以使用<code>chdir</code>函数更改工作目录。</p>
+<h4 id="起始目录"><a href="#起始目录" class="headerlink" title="起始目录"></a>起始目录</h4><p>登录时，工作目录设置为起始目录（home directory），该起始目录从口令文件中相应用户的登录项中取得。</p>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h4 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h4><p>文件描述符通常是一个<em>小的非负整数</em>，内核用以标识一个特定进程正在访问的文件。当内核打开一个文件或创建一个新文件时，都返回一个文件描述符，它可以用来读、写。</p>
+<h4 id="标准输入、标准输出和标准错误"><a href="#标准输入、标准输出和标准错误" class="headerlink" title="标准输入、标准输出和标准错误"></a>标准输入、标准输出和标准错误</h4><p>每当运行一个新程序是，所有的shell都为其打开3个文件描述符，即<em>标准输入</em>、<em>标准输出</em>和<em>标准错误</em>。如果不做特殊处理，这3个描述符都链接向终端。大多数shell都可以是任何一个或这3个描述符重定向到某个文件，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &gt; file.list</span><br></pre></td></tr></table></figure>
+
+<h4 id="不带缓冲的I-O"><a href="#不带缓冲的I-O" class="headerlink" title="不带缓冲的I/O"></a>不带缓冲的I/O</h4><p>函数<code>open</code>、<code>read</code>、<code>write</code>、<code>lseek</code>和<code>close</code>提供了不带缓冲的I/O，这些函数都使用文件描述符。</p>
+<p>下面的程序从标准输入读，并向标准输出写</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFSIZE 4096</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> buf[BUFFSIZE];</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> ((n = read(STDIN_FILENO, buf, BUFFSIZE)) &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> (write(STDOUT_FILENO, buf, n) != n)</span><br><span class="line">            err_sys(<span class="string">"write error"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</span><br><span class="line">        err_sys(<span class="string">"read error"</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h4><p>标注I/O函数为那些不带缓冲的I/O函数提供了一个带缓冲的接口。</p>
+<p>下面的程序是使用标准I/O的版本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> ((c = getc(<span class="built_in">stdin</span>)) != EOF)</span><br><span class="line">        <span class="keyword">if</span> (putc(c, <span class="built_in">stdout</span>) == EOF)</span><br><span class="line">            err_sys(<span class="string">"output error"</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (ferror(<span class="built_in">stdin</span>))</span><br><span class="line">        err_sys(<span class="string">"input error"</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="程序和进程"><a href="#程序和进程" class="headerlink" title="程序和进程"></a>程序和进程</h3><h4 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h4><p>程序是一个存储在磁盘上某个目录中的可执行文件。内核使用<code>exec</code>函数，将程序读入内存，并执行程序。</p>
+<h4 id="进程和进程ID"><a href="#进程和进程ID" class="headerlink" title="进程和进程ID"></a>进程和进程ID</h4><p>程序的执行实例被称为进程。每个进程都有一个唯一的数字标识符，称为进程ID。</p>
+<h4 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h4><p>有3个用于进程控制的主要函数：<code>fork</code>、<code>exex</code>、<code>waitpid</code>。</p>
+<h4 id="线程和线程ID"><a href="#线程和线程ID" class="headerlink" title="线程和线程ID"></a>线程和线程ID</h4><p>一个进程内的所有线程共享同一地址空间、文件描述符、栈以及和进程相关的属性。线程ID只在它所属的进程内起作用</p>
+<h3 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h3><p>UNIX系统出错是，通常会返回一个负值，而且整型变量errno通常被设置为具有特定信息的值。多个线程共享进程地址空间，每个线程都有属于自己的局部errno。</p>
+<ol>
+<li>如果没有出错，其值不会被历程清除。</li>
+<li>任何函数都不会讲errno值设置为0。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strerror</span><span class="params">(<span class="keyword">int</span> errnum)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>strerror</code>函数将errnum映射为一个出错消息字符串。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">perror</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *msg)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>perror</code>函数基于errno的当前值，在标准错误上产生一条出错消息，然后返回。</p>
+<p>它首先输出msg指向的字符串，然后是一个冒号，一个空格，接着是对应于errno值的出错消息，最后是一个换行符。</p>
+<p>使用方法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"EACCES: %s\n"</span>, strerror(EACCESS));</span><br><span class="line">    errno = ENOENT;</span><br><span class="line">    perror(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h3><h4 id="用户ID"><a href="#用户ID" class="headerlink" title="用户ID"></a>用户ID</h4><p>用户ID（user ID）是一个数值，向系统标识各个不同的用户。用户ID为0的用户为根用户（root）或超级用户（superuser）。</p>
+<h4 id="组ID"><a href="#组ID" class="headerlink" title="组ID"></a>组ID</h4><p>在口令文件中有多个登录项具有相同的组ID。组被用于将若干用户集合到项目或部门中，以允许同组的各个成员之间共享资源。</p>
+<p>打印用户ID和组ID：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"uid = %d, gid = %d\n"</span>, getuid(), getpid());</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="附属组ID"><a href="#附属组ID" class="headerlink" title="附属组ID"></a>附属组ID</h4><p>它允许一个用户属于多至16个其他的组。</p>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>信号（signal）用于通知进程发生了某种情况。</p>
+<p>处理方式有三种：</p>
+<ol>
+<li>忽略信号。</li>
+<li>按系统默认方式处理。</li>
+<li>提供一个函数，信号发生时调用该函数。</li>
+</ol>
+<p>终端键盘上有两种产生信号的方法，分别为中断键（interrupt key，通常是<code>Delete</code>键或<code>Ctrl + C</code>）和退出键（quit key，通常是<code>ctrl + \</code>）。</p>
+<p>下面的程序捕捉中断键，并调用对应函数，只是打印一条消息，然后打印一个新提示符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_int</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[MAXLINE];</span><br><span class="line">    <span class="keyword">pid_t</span> pid;</span><br><span class="line">    <span class="keyword">int</span> status;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (signal(SIGINT, sig_int) == SIG_ERR)</span><br><span class="line">        err_sys(<span class="string">"signal error"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%% "</span>);</span><br><span class="line">    <span class="keyword">while</span> (fgets(buf, MAXLINE, <span class="built_in">stdin</span>) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (buf[<span class="built_in">strlen</span>(buf) - <span class="number">1</span>] == <span class="string">'\n'</span>)</span><br><span class="line">            buf[<span class="built_in">strlen</span>(buf) - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> ((pid = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            err_sys(<span class="string">"fork error"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">            execlp(buf, buf, (<span class="keyword">char</span> *)<span class="number">0</span>);</span><br><span class="line">            err_ret(<span class="string">"couldn't execute: %s"</span>, buf);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">127</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((pid = waitpid(pid, &amp;status, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">            err_sys(<span class="string">"waitpid error"</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%% "</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">sig_int(<span class="keyword">int</span> signo)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"interrupt\n%% "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="时间值"><a href="#时间值" class="headerlink" title="时间值"></a>时间值</h3><p>UNIX使用两种不同的时间值：</p>
+<ol>
+<li>日历时间。该值是自1970年1月1日 00:00:00以来所经过的秒数累计值。系统基本数据类型<code>time_t</code>用于保存这种时间值。</li>
+<li>进程时间。也被称为CPU时间，用以度量进程使用的CPU资源。进程时间以始终滴答计算。每秒曾经取值为50、60或100个时钟滴答。系统基本数据类型<code>clock_t</code>保存这种时间值。</li>
+</ol>
+<p>当度量一个进程的执行时间时，UNIX系统为一个进程维护了3个进程时间值：</p>
+<ul>
+<li>时钟时间</li>
+<li>用户CPU时间</li>
+<li>系统CPU时间</li>
+</ul>
+<p>时钟时间又称为<em>墙上时钟时间（wall clock time）</em>，它是进程运行的时间总量，其值与系统中同时运行的进程数有关。</p>
+<p>用户CPU时间是执行用户指令所用的时间量。系统CPU时间是为该进程执行内核程序所经历的时间。合称为CPU时间。</p>
+<h3 id="系统调用和库函数"><a href="#系统调用和库函数" class="headerlink" title="系统调用和库函数"></a>系统调用和库函数</h3><p>UNIX都提供良好定义、数量有限、直接进入内核的入口点，称为<em>系统调用（system call）</em>。</p>
+<p>通用库函数可能会调用一个或多个内核的系统调用，但它们不是内核的入口点。</p>
+<p>应用程序既可以调用系统调用也可以调用库函数。</p>
+<h3 id="习题答案"><a href="#习题答案" class="headerlink" title="习题答案"></a>习题答案</h3><h4 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h4><p>利用<code>ls</code>命令中的下面两个选择项：</p>
+<p>-i：显示文件或目录的i结点数目</p>
+<p>-d：如果参数是一目录，只列出其名字，而不是目录中的所有文件</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190623122422.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h4><p>UNIX是多任务系统，在程序运行的同时其他两个进程也在运行</p>
+<h4 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h4><p>perror的msg参数是个指针，perror就可以改变msg指向的字符串。然而使用限定const限制了perror不能修改msg指针指向的字符串。</p>
+<p>而对于strerror，其错误号参数是整数类型，并且C是按值传递参数，所有strerror函数修改不了函数外的值，所以没有必要使用const限定。</p>
+<h4 id="1-4"><a href="#1-4" class="headerlink" title="1.4"></a>1.4</h4><p>2038年。将time_t数据类型定义为64位整型。</p>
+<h4 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h4><p>$$天t = 2^{32} / (60 * 60 * 24 * 100) = 248.551348天$$</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-23T04:34:38.049Z" itemprop="dateUpdated">2019-06-23 12:34:38</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/archives/a47d4271.html" target="_blank" rel="external">https://zhaoziwen.com.cn/archives/a47d4271.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apue/">apue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/a47d4271.html&title=《APUE 第一章 UNIX基础知识》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/a47d4271.html&title=《APUE 第一章 UNIX基础知识》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/a47d4271.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE 第一章 UNIX基础知识》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/a47d4271.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/a47d4271.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/archives/9439fc83.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">B树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/a47d4271.html&title=《APUE 第一章 UNIX基础知识》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/a47d4271.html&title=《APUE 第一章 UNIX基础知识》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/a47d4271.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE 第一章 UNIX基础知识》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/a47d4271.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/a47d4271.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3azW6EMAxFYd7/panUbQd6rh2q4pyskAYYviws/+Q48Dq/19X11fp5P3/b8cSSIUPGaxn9TyEfdP/+9KkPVBkyZGzAIEH2/m9ISCUbUXtWhgwZMvh1LbDKkCFDxtqAy5O5NGXsBGsZMmTswCBFLClx75tl/P0P1uIyZMh4IaM/GHju+k/nGzJkyPiXjDNcpE22KtEMvkqGDBmjGXw8mSaIJDZ2RqEHnzPIkCFjBCM97tDZiHSEWXy/DBkyBjFqI0NC4mPOWjktQ4aMfRiddLAWlNPtSDdRhgwZ8xjFEjEMgjzhI5vyS9dQhgwZQxm8Kc/Hjfz4Vzok+LARMmTIGM3gRWZamqblcecpGTJkzGakQ8c0mUOHJBqjAhkyZOzA4A/zQEzuX1voypAhYzaDJ3zpkJIXonwkUBwMyJAh4+UMfsDiiYMXrebafbtNhgwZgxi11j8fc97fyYteFGplyJCxDSNtipHgmI4z0wGnDBkyZjN4ipYmbf2GWq1tJ0OGjHmMVaE2bdh1hgRxaihDhowRjFqYqx3C6IwNLu+UIUPGaAYvKXlzLf2gZS08GTJkDGWc4apVybXBQ/C/MmTIGM1Ig2l6wIIXw+TXNJWUIUPGJAYJsrVdSRPE2kbIkCFjH8baQxU1QLEKlyFDhowwXUsTPj5CQF1DGTJkyGiszkAUjS5kyJCxAYMfjOCp4apUEqWVMmTIGM2oDQY6AbozEG1hZMiQ8T7GF+0TiYdzG6DZAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
