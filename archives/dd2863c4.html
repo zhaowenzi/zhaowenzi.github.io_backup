@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?74de4378fdea19ed4f59264fe4bd6716"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>K-d树 | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构,树结构">
+    <meta name="description" content="k-d树是在k维（k-dimensional）欧几里得空间组织点的数据结构。k-d树可以使用在多种应用场合，如多维键值搜索（例如范围搜索及最邻近搜索），是二叉空间划分树的一个特例。 算法原理k-d树是每个结点均为k维数值点的二叉树，其上的每个结点代表一个超平面，该超平面垂直于当前划分维度的坐标轴，并在该维度上将空间划分为两部分，一部分在其左子树，另一部分在其右子树。 树的构建平衡的k-d树的所有叶">
+<meta name="keywords" content="数据结构,树结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K-d树">
+<meta property="og:url" content="https://zhaoziwen.com.cn/archives/dd2863c4.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="k-d树是在k维（k-dimensional）欧几里得空间组织点的数据结构。k-d树可以使用在多种应用场合，如多维键值搜索（例如范围搜索及最邻近搜索），是二叉空间划分树的一个特例。 算法原理k-d树是每个结点均为k维数值点的二叉树，其上的每个结点代表一个超平面，该超平面垂直于当前划分维度的坐标轴，并在该维度上将空间划分为两部分，一部分在其左子树，另一部分在其右子树。 树的构建平衡的k-d树的所有叶">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624220717.png">
+<meta property="og:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624220821.png">
+<meta property="og:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624221201.png">
+<meta property="og:updated_time" content="2019-06-25T03:26:13.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="K-d树">
+<meta name="twitter:description" content="k-d树是在k维（k-dimensional）欧几里得空间组织点的数据结构。k-d树可以使用在多种应用场合，如多维键值搜索（例如范围搜索及最邻近搜索），是二叉空间划分树的一个特例。 算法原理k-d树是每个结点均为k维数值点的二叉树，其上的每个结点代表一个超平面，该超平面垂直于当前划分维度的坐标轴，并在该维度上将空间划分为两部分，一部分在其左子树，另一部分在其右子树。 树的构建平衡的k-d树的所有叶">
+<meta name="twitter:image" content="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624220717.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen.com.cn" title="me@zhaoziwen.com.cn" class="mail">me@zhaoziwen.com.cn</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">K-d树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">K-d树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-25T03:24:50.000Z" itemprop="datePublished" class="page-time">
+  2019-06-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">算法原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#树的构建"><span class="post-toc-number">2.</span> <span class="post-toc-text">树的构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#切分维度选择优化"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">切分维度选择优化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#中值选择优化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">中值选择优化</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#构建代码"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">构建代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#寻找d维最小坐标点"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">寻找d维最小坐标点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#若当前结点的切分维度是d"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">若当前结点的切分维度是d</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#若当前结点的切分维度不是d"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">若当前结点的切分维度不是d</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#新增结点"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">新增结点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#删除结点"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">删除结点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#无子树"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">无子树</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#有右子树"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">有右子树</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#无右子树有左子树"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">无右子树有左子树</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最近邻搜索"><span class="post-toc-number">4.</span> <span class="post-toc-text">最近邻搜索</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复杂度分析"><span class="post-toc-number">5.</span> <span class="post-toc-text">复杂度分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-kd-tree" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">K-d树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-25 11:24:50" datetime="2019-06-25T03:24:50.000Z" itemprop="datePublished">2019-06-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>k-d树是在k维（k-dimensional）欧几里得空间组织点的数据结构。k-d树可以使用在多种应用场合，如多维键值搜索（例如范围搜索及最邻近搜索），是二叉空间划分树的一个特例。</p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>k-d树是每个结点均为k维数值点的二叉树，其上的每个结点代表一个超平面，该超平面垂直于当前划分维度的坐标轴，并在该维度上将空间划分为两部分，一部分在其左子树，另一部分在其右子树。</p>
+<h3 id="树的构建"><a href="#树的构建" class="headerlink" title="树的构建"></a>树的构建</h3><p>平衡的k-d树的所有叶子结点到根结点的距离近视相等。但平衡的k-d树对最近邻搜索、空间搜索等应用场景并非是最优的。</p>
+<p>常规的k-d树的构建过程为：循环依序取数据点的各维度来作为切分维度，取数据点在该维度的中值作为切分超平面，将中值左侧的数据点挂在其左子树，将中值右侧的数据点挂在其右子树。递归处理其子树，直至所有数据点挂载完毕。</p>
+<h4 id="切分维度选择优化"><a href="#切分维度选择优化" class="headerlink" title="切分维度选择优化"></a>切分维度选择优化</h4><p>构建开始前，对比数据点在各维度的分布情况，数据点在某一维度坐标值的方差越大分布越分散，越小分布越集中。从方差大的维度开始切分可以取得很好的切分效果及平衡性。</p>
+<h4 id="中值选择优化"><a href="#中值选择优化" class="headerlink" title="中值选择优化"></a>中值选择优化</h4><p>第一种在算法开始前，对原始数据点在所有维度进行一次排序，存储下来，然后在后续的中值选择中，无须每次都对子集进行排序</p>
+<p>第二种从原始数据点中随机选择固定数目的点，然后对其进行排序，每次从这些样本中取中值，来作为分割超平面。</p>
+<p>本文采用第一种方法，以二维平面(x, y)的集合(2, 3)，(5, 4)，(9, 6)，(4, 7)，(8, 1)，(9,6)为例说明构建过程。</p>
+<ol>
+<li>构建根结点时， 此时的切分维度为x，如上点集合在x维从小到大排序为(2, 3)，(4, 7)，(5, 4)，(7, 2)，(8, 1)，(9, 6)；其中值为(7, 2)。</li>
+<li>(2, 3)，(4, 7)，(5, 4)挂在(7, 2)结点的左子树，(8, 1)，(9, 6)挂在(7, 2)结点的右子树。</li>
+<li>构建(7, 2)结点的左子树时，点集合(2, 3)，(4, 7)，(5, 4)此时的切分维度为y，中值为(5, 4)作为分割平面，(2, 3)挂在其左子树，(4, 7)挂在右子树。</li>
+<li>构建(7, 2)结点的右子树时，点集合(8, 1)，(9, 6)此时的切分维度也为y，中值为(9, 6)作为分割平面，(8, 1)挂在其左子树。至此k-d树构建完成。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624220717.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>上述k-d树也是一个二维平面逐步划分的过程。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624220821.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>在三维空间中k-d树的构建及空间划分过程如下：</p>
+<p>首先，边框为红色的竖直平面将整个平面划分为两部分，这两部分又分别被边框为绿色的水平平面划分为上下两部分。最后这四个子空间又分别被边框为蓝色的竖直平面分割为两部分，变成8个子空间，这8个子空间即为叶子结点。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://hexo-blog-1252103983.cos.ap-guangzhou.myqcloud.com/20190624221201.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="构建代码"><a href="#构建代码" class="headerlink" title="构建代码"></a>构建代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kd_tree</span><span class="params">(points, depth)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> <span class="number">0</span> == len(points):</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">  cutting_dim = depth % len(points[<span class="number">0</span>])</span><br><span class="line">  medium_index = len(points) // <span class="number">2</span></span><br><span class="line">  points.sort(key = itemgetter(cutting_dim))</span><br><span class="line">  node = Node(points[medium_index])</span><br><span class="line">  node.left = kd_tree(points[:medium_index], depth + <span class="number">1</span>)</span><br><span class="line">  node.right = kd_tree(points[medium_index + <span class="number">1</span>:], depth + <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
+
+<h4 id="寻找d维最小坐标点"><a href="#寻找d维最小坐标点" class="headerlink" title="寻找d维最小坐标点"></a>寻找d维最小坐标点</h4><h5 id="若当前结点的切分维度是d"><a href="#若当前结点的切分维度是d" class="headerlink" title="若当前结点的切分维度是d"></a>若当前结点的切分维度是d</h5><p>因其右子树结点均大于等于当前结点在d维的坐标值，所以可以忽略其右子树，仅在其左子树进行搜索。若无左子树，当前结点即是最小坐标值结点。</p>
+<h5 id="若当前结点的切分维度不是d"><a href="#若当前结点的切分维度不是d" class="headerlink" title="若当前结点的切分维度不是d"></a>若当前结点的切分维度不是d</h5><p>需在其左子树与右子树分别进行递归搜索</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findmin</span><span class="params">(n, depth, cutting_dim, min)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> min <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    min = n.location</span><br><span class="line">  <span class="keyword">if</span> n <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">return</span> min</span><br><span class="line">  current_cutting_dim = depth % len(min)</span><br><span class="line">  <span class="keyword">if</span> n.location[cutting_dim] &lt; min[cutting_dim]:</span><br><span class="line">    min = n.location</span><br><span class="line">  <span class="keyword">if</span> cutting_dim == current_cutting_dim:</span><br><span class="line">    <span class="keyword">return</span> findmin(n.left, depth + <span class="number">1</span>, cutting_dim, min)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    leftmin = findmin(n.left, depth + <span class="number">1</span>, cutting_dim, min)</span><br><span class="line">    rightmin = findmin(n.right, depth + <span class="number">1</span>, cutting_dim, min)</span><br><span class="line">    <span class="keyword">if</span> leftmin[cutting_dim] &gt; rightmin[cutting_dim]:</span><br><span class="line">      <span class="keyword">return</span> rightmin</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">return</span> leftmin</span><br></pre></td></tr></table></figure>
+
+<h4 id="新增结点"><a href="#新增结点" class="headerlink" title="新增结点"></a>新增结点</h4><p>从根结点出发，若待插入结点在当前结点切分维度的坐标值小于当前结点在该维度的坐标值时，在其左子树插入；若大于等于当前结点在该维度的坐标值时，在其右子树插入。递归插入，直至叶子结点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(n, point, depth)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> n <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">return</span> Node(point)</span><br><span class="line">  cutting_dim = depth % len(point)</span><br><span class="line">  <span class="keyword">if</span> point[cutting_dim] &lt; n.location[cutting_dim]:</span><br><span class="line">    <span class="keyword">if</span> n.left <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      n.left = Node(point)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      insert(n.left, point, depth + <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> n.right <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      n.right = Node(point)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      insert(n.right, point, depth + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>多次插入结点会导致树的不平衡，当不平衡性超过某一阈值时，需要进行再调整</p>
+<h4 id="删除结点"><a href="#删除结点" class="headerlink" title="删除结点"></a>删除结点</h4><h5 id="无子树"><a href="#无子树" class="headerlink" title="无子树"></a>无子树</h5><p>直接删除</p>
+<h5 id="有右子树"><a href="#有右子树" class="headerlink" title="有右子树"></a>有右子树</h5><p>在T.right寻找x切分维度最小的结点p，然后替换被删结点T；递归删除结点p。</p>
+<h5 id="无右子树有左子树"><a href="#无右子树有左子树" class="headerlink" title="无右子树有左子树"></a>无右子树有左子树</h5><p>在T.left寻找x切分维度最小的结点p，即p=findmin(T.left, cutting-dim=x)，然后用结点p替换被删除结点T；将原T.left作为p.right；递归处理删除结点p。</p>
+<p>之所以未采用findmax(T.left, cutting-dim=x)结点来替换被删结点，是由于原被删结点的左子树存在x维度最大值相等的情形，这样就破坏了左子树在x分割维度的坐标需小于其根结点的定义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(n, point, depth)</span>:</span></span><br><span class="line">  cutting_dim = depth % len(point)</span><br><span class="line">  <span class="keyword">if</span> n.location = point:</span><br><span class="line">    <span class="keyword">if</span> n.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">      n.location = findmin(n.right + <span class="number">1</span>, cutting_dim, <span class="literal">None</span>)</span><br><span class="line">      delete(n.right, n.location, depth + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> n.left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">      n.location = findmin(n.left, depth + <span class="number">1</span>)</span><br><span class="line">      delete(n.left, n.location, depth + <span class="number">1</span>)</span><br><span class="line">      n.right = n.left</span><br><span class="line">      n.left = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      n = <span class="literal">None</span></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> point[cutting_dim] &lt; n.location[cutting_dim]:</span><br><span class="line">      delete(n.left, point, depth + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      delete(n.right, point, depth + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="最近邻搜索"><a href="#最近邻搜索" class="headerlink" title="最近邻搜索"></a>最近邻搜索</h3><p>如在上文构建好的k-d树上搜索(3, 5)的最近邻时：</p>
+<ol>
+<li>首先从根结点(7, 2)出发，将当前最近邻设为(7, 2)，对该k-d树作深度优先遍历。以(3， 5)为圆心，其到(7, 2)的距离为半径画圆，可以看出(8, 1)右侧的区域与该圆不相交，所以(8, 1)的右子树全部忽略。</li>
+<li>接着走到(7, 2)左子树根结点(5, 4)，与原最近邻距离对比后，更新当前最邻近(5, 4)。以(3, 5)为圆心，其到(5, 4)的距离为半径画圆，(7, 2)右侧的区域与该圆不想交，忽略该侧所有结点，即(7, 2)的整个右子树被标记为已忽略。</li>
+<li>遍历完(5, 4)的左右叶子结点，发现与当前最优距离相等，不更新最邻近。所以(3, 5)的最邻近为(5, 4)</li>
+</ol>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>平均复杂度</th>
+<th>最坏复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新增结点</td>
+<td>$O(logn)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>删除结点</td>
+<td>$O(logn)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>最近邻搜索</td>
+<td>$O(logn)$</td>
+<td>$O(n)$</td>
+</tr>
+</tbody></table>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://leileiluoluo.com/posts/kdtree-algorithm-and-implementation.html" rel="external nofollow noopener noreferrer" target="_blank">k-d tree算法原理及实现</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-25T03:26:13.759Z" itemprop="dateUpdated">2019-06-25 11:26:13</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/archives/dd2863c4.html" target="_blank" rel="external">https://zhaoziwen.com.cn/archives/dd2863c4.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树结构/">树结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/dd2863c4.html&title=《K-d树》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/dd2863c4.html&title=《K-d树》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/dd2863c4.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《K-d树》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/dd2863c4.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/dd2863c4.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/archives/a47d4271.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">APUE 第一章 UNIX基础知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/dd2863c4.html&title=《K-d树》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/dd2863c4.html&title=《K-d树》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/dd2863c4.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《K-d树》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/dd2863c4.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/dd2863c4.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aQW7DMAxE0dz/0g7QbS1hhmMHEPm1Khrb0fOCIUV+PvK6/tbq/6u1unf16f97H14wYMA4llHbyp66esLq+e5dN/uBAQPGAEa+LSWk7r9Xf30wYMCA4W5FWfvtwoABA8YbAVcJxG7gToI1DBgwJjCUIjYvd/Xnv1iLw4AB40CG2xj45d8v9jdgwIBxCOMy1z7V24dCN9E0dgUDBozWDGUYQkns3DanO4ohhWMYMGC0ZrjjDsmLcFuYxefDgAGjEUM/lNcLSzeVrJXTMGDAmMNQErJaKeuGcvewDwYMGDMZtSaBW/o+VSo/gIEBA8YhjNpxvz62pQ+E6U2CmxcBAwaM1owkaUsan/p2jSAOAwaMpgx3ACLvG7oNBum7YMCA0ZqhtxLdMYsHfgdqvxswYMAYwKiF4P2m3XM+ZWjs5jkwYMBozUgaA3prMyll9yQYMGD0ZuTDE7VmZ/IKir8YMGDAOJyhF5xu+Zq0M40EEQYMGK0ZSsJXDILBgVqU28KAAaMdo3bQr9/rJpe1UhYGDBgTGMrhV1Lo6m0DlwoDBowJjDzhU/DuQZubXMKAAaM34zKXfpfbANBfx82nMGDAaM2oDVjUhjCU1qnbWIUBA8Ychh5k9etrwxbRqAcMGDAGMGoB1DgOM6+xgz4MGDBgyCS9tem2EIxpERgwYIxn1EJn0hCVWhcwYMAYwNCbAUr6WLs+KX1hwIDRm+EWkEmAdtuWeaCHAQPG4YwvttDbGcnomswAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
