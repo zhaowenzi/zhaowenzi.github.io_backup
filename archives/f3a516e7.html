@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?74de4378fdea19ed4f59264fe4bd6716"></script>
+<!-- End Baidu Tongji -->
+
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>APUE 第二章 UNIX标准及实现 | Mose&#39;s blog | Think Deeper &amp; Work Harder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="apue">
+    <meta name="description" content="UNIX标准化人们在UNIX编程环境和C程序设计语言的标准化方面已经做了很多工作。虽然UNIX应用程序在不同的UNIX操作系统版本之间进行移植相当容易，但是20世纪80年代UNIX版本种类的剧增以及他们之间差距的扩大，导致很多大用户呼吁对其进行标准化。 ISO CISO C标准现在由ISO/IEC的C程序设计语言国际标准工作组维护和开发。ISO C标准的意图是提供C程序的可移植性，使其能适应于大量">
+<meta name="keywords" content="apue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APUE 第二章 UNIX标准及实现">
+<meta property="og:url" content="https://zhaoziwen.com.cn/archives/f3a516e7.html">
+<meta property="og:site_name" content="Mose&#39;s blog">
+<meta property="og:description" content="UNIX标准化人们在UNIX编程环境和C程序设计语言的标准化方面已经做了很多工作。虽然UNIX应用程序在不同的UNIX操作系统版本之间进行移植相当容易，但是20世纪80年代UNIX版本种类的剧增以及他们之间差距的扩大，导致很多大用户呼吁对其进行标准化。 ISO CISO C标准现在由ISO/IEC的C程序设计语言国际标准工作组维护和开发。ISO C标准的意图是提供C程序的可移植性，使其能适应于大量">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-25T07:48:16.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APUE 第二章 UNIX标准及实现">
+<meta name="twitter:description" content="UNIX标准化人们在UNIX编程环境和C程序设计语言的标准化方面已经做了很多工作。虽然UNIX应用程序在不同的UNIX操作系统版本之间进行移植相当容易，但是20世纪80年代UNIX版本种类的剧增以及他们之间差距的扩大，导致很多大用户呼吁对其进行标准化。 ISO CISO C标准现在由ISO/IEC的C程序设计语言国际标准工作组维护和开发。ISO C标准的意图是提供C程序的可移植性，使其能适应于大量">
+    
+        <link rel="alternate" type="application/atom+xml" title="Mose&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/psb.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">z2w</h5>
+          <a href="mailto:me@zhaoziwen.com.cn" title="me@zhaoziwen.com.cn" class="mail">me@zhaoziwen.com.cn</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhaowenzi" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/FTC0003" target="_blank" rel="external nofollow noopener noreferrer">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">APUE 第二章 UNIX标准及实现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">APUE 第二章 UNIX标准及实现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-25T07:47:49.000Z" itemprop="datePublished" class="page-time">
+  2019-06-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UNIX环境高级编程/">UNIX环境高级编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UNIX标准化"><span class="post-toc-number">1.</span> <span class="post-toc-text">UNIX标准化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ISO-C"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ISO C</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IEEE-POSIX"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IEEE POSIX</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Single-UNIX-Specification"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Single UNIX Specification</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#FIPS"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">FIPS</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UNIX系统实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">UNIX系统实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#限制"><span class="post-toc-number">3.</span> <span class="post-toc-text">限制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ISO-C限制"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">ISO C限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#POSIX限制"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">POSIX限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#XSI限制"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">XSI限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#函数sysconf、pathconf和fpathconf"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">函数sysconf、pathconf和fpathconf</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#功能测试宏"><span class="post-toc-number">4.</span> <span class="post-toc-text">功能测试宏</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本系统数据类型"><span class="post-toc-number">5.</span> <span class="post-toc-text">基本系统数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#习题答案"><span class="post-toc-number">6.</span> <span class="post-toc-text">习题答案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">2.1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2.2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">2.3</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-apue-2" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">APUE 第二章 UNIX标准及实现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-25 15:47:49" datetime="2019-06-25T07:47:49.000Z" itemprop="datePublished">2019-06-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UNIX环境高级编程/">UNIX环境高级编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="UNIX标准化"><a href="#UNIX标准化" class="headerlink" title="UNIX标准化"></a>UNIX标准化</h3><p>人们在UNIX编程环境和C程序设计语言的标准化方面已经做了很多工作。虽然UNIX应用程序在不同的UNIX操作系统版本之间进行移植相当容易，但是20世纪80年代UNIX版本种类的剧增以及他们之间差距的扩大，导致很多大用户呼吁对其进行标准化。</p>
+<h4 id="ISO-C"><a href="#ISO-C" class="headerlink" title="ISO C"></a>ISO C</h4><p>ISO C标准现在由ISO/IEC的C程序设计语言国际标准工作组维护和开发。ISO C标准的意图是提供C程序的可移植性，使其能适应于大量的操作系统。标准不但定义了C程序设计语言的语法，还规定了必备的标准库。<br>1989年，C程序设计语言的ANSI标准被采纳为国际标准，也是最早的一次标准化过程，目前被称为C89标准<br>1999年，ISO C标准被更新，在C89的基础上增加了基本数据类型、关键字和一些系统函数，这也是目前主流的C语言编译器标准，即C99标准，是继C89以后的第二个C语言官方标准。自1999年以来，也有3次技术勘误用于修正ISO C标准，分别于2001年、2004年和2007年，2011年还更新了C11标准，但是非常遗憾的是，标准审批和实际生产还是有一定时间延迟，所以C11标准目前还并非主流。<br>根据ISO C标准，C程序设计语言有24个头文件，目前所有的Unix环境都支持这些头文件。</p>
+<table>
+<thead>
+<tr>
+<th align="left">头文件</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&lt;assert.h&gt;</td>
+<td align="left">验证程序断言</td>
+</tr>
+<tr>
+<td align="left">&lt;complex.h&gt;</td>
+<td align="left">复数运算支持</td>
+</tr>
+<tr>
+<td align="left">&lt;ctype.h&gt;</td>
+<td align="left">字符分类和映射支持</td>
+</tr>
+<tr>
+<td align="left">&lt;errno.h&gt;</td>
+<td align="left">错误码</td>
+</tr>
+<tr>
+<td align="left">&lt;fenv.h&gt;</td>
+<td align="left">浮点环境</td>
+</tr>
+<tr>
+<td align="left">&lt;float.h&gt;</td>
+<td align="left">浮点支持</td>
+</tr>
+<tr>
+<td align="left">&lt;inttypes.h&gt;</td>
+<td align="left">整型格式转换</td>
+</tr>
+<tr>
+<td align="left">&lt;iso646.h&gt;</td>
+<td align="left">赋值、关系、一元操作符宏</td>
+</tr>
+<tr>
+<td align="left">&lt;limits.h&gt;</td>
+<td align="left">实现常量</td>
+</tr>
+<tr>
+<td align="left">&lt;locale.h&gt;</td>
+<td align="left">本地化支持</td>
+</tr>
+<tr>
+<td align="left">&lt;math.h&gt;</td>
+<td align="left">数学运算库</td>
+</tr>
+<tr>
+<td align="left">&lt;setjmp.h&gt;</td>
+<td align="left">非局部goto</td>
+</tr>
+<tr>
+<td align="left">&lt;signal.h&gt;</td>
+<td align="left">信号支持</td>
+</tr>
+<tr>
+<td align="left">&lt;stdarg.h&gt;</td>
+<td align="left">可变长度参数</td>
+</tr>
+<tr>
+<td align="left">&lt;stdbool.h&gt;</td>
+<td align="left">布尔类型支持</td>
+</tr>
+<tr>
+<td align="left">&lt;stddef.h&gt;</td>
+<td align="left">标准定义</td>
+</tr>
+<tr>
+<td align="left">&lt;stdint.h&gt;</td>
+<td align="left">标准整形</td>
+</tr>
+<tr>
+<td align="left">&lt;stdio.h&gt;</td>
+<td align="left">标准输入输出</td>
+</tr>
+<tr>
+<td align="left">&lt;stdlib.h&gt;</td>
+<td align="left">实用函数库</td>
+</tr>
+<tr>
+<td align="left">&lt;string.h&gt;</td>
+<td align="left">字符串操作</td>
+</tr>
+<tr>
+<td align="left">&lt;tgmath.h&gt;</td>
+<td align="left">通用类型数学宏</td>
+</tr>
+<tr>
+<td align="left">&lt;time.h&gt;</td>
+<td align="left">时间日期支持</td>
+</tr>
+<tr>
+<td align="left">&lt;wchar.h&gt;</td>
+<td align="left">多字节宽字符支持</td>
+</tr>
+<tr>
+<td align="left">&lt;wctype.h&gt;</td>
+<td align="left">宽字符分类和映射支持</td>
+</tr>
+</tbody></table>
+<h4 id="IEEE-POSIX"><a href="#IEEE-POSIX" class="headerlink" title="IEEE POSIX"></a>IEEE POSIX</h4><p>IEEE POSIX在原书内指的是IEEE 1003.1操作系统接口标准，该标准的1988版本递交给ISO，最终成为了国际标准POSIX.1，而后IEEE 1003.1工作组对其作出很多修订，包括了著名的pthreads多线程接口。POSIX标准不仅包含了ISO C标准函数库，还根据标准要求提供包含了系统调用和库函数的头文件，在这里就不一一列出了。由于POSIX标准只是定义了操作系统接口而非实现，所以并未区分系统调用和库函数。其接口分为两部分，一部分是强制规定必须的部分，而另外一部分是非强制要求的可选部分。</p>
+<h4 id="Single-UNIX-Specification"><a href="#Single-UNIX-Specification" class="headerlink" title="Single UNIX Specification"></a>Single UNIX Specification</h4><p>Single Unix Specification是POSIX.1标准的一个超集，它定义了一系列附加接口扩展了POSIX.1的功能，Open Group拥有Unix商标，他们定义了SUS标准，一个系统想要称为Unix系统，就必须实现这些接口，并且通过验收性测试，才能得到Unix商标使用权，其中就包括了Mac OS X系统，而Linux虽然实现了这些接口，但是从未提出过申请，所以Linux没有得到过Unix商标。</p>
+<h4 id="FIPS"><a href="#FIPS" class="headerlink" title="FIPS"></a>FIPS</h4><p>已经撤回，不再考虑。</p>
+<h3 id="UNIX系统实现"><a href="#UNIX系统实现" class="headerlink" title="UNIX系统实现"></a>UNIX系统实现</h3><p>标准只是借口的规范。</p>
+<ol>
+<li>SVR4</li>
+<li>4.4BSD</li>
+<li>FreeBSD</li>
+<li>Linux</li>
+<li>Mac OS X</li>
+<li>Solaris</li>
+</ol>
+<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><p>由于大量标准化工作的努力，已有若干种移植的方法用以确定这些幻数和具体实现定义的限制。</p>
+<p>有两种类型的限制是必需的：</p>
+<ol>
+<li>编译时限制（例如，短整型的最大值是多少）</li>
+<li>运行时限制（例如，文件名有多少个字符）</li>
+</ol>
+<p>编译时限制可在头文件中定义。程序在编译时可以包含这些头文件。但是，运行时限制则要求进程调用一个函数获得限制值。</p>
+<p>为了解决这类限制，提供了一下3种限制：</p>
+<ol>
+<li>编译时限制（头文件）</li>
+<li>与文件或目录无关的运行时限制（sysconf函数）</li>
+<li>与文件或目录有关的运行时限制（pathconf和fpathconf函数）</li>
+</ol>
+<h4 id="ISO-C限制"><a href="#ISO-C限制" class="headerlink" title="ISO C限制"></a>ISO C限制</h4><p>ISO C定义的所有编译时限制都列在头文件&lt;limits.h&gt;中。这些限制常量在一个给定的系统中并不会改变。</p>
+<h4 id="POSIX限制"><a href="#POSIX限制" class="headerlink" title="POSIX限制"></a>POSIX限制</h4><p>POSIX.1定义了很多设计操作系统实现限制的常量。这些限制和常量可能定义在&lt;limits.h&gt;中，其余的则按照具体条件可定义、可不定义。</p>
+<h4 id="XSI限制"><a href="#XSI限制" class="headerlink" title="XSI限制"></a>XSI限制</h4><p>XSI定义了代表实现限制的几个常量。</p>
+<h4 id="函数sysconf、pathconf和fpathconf"><a href="#函数sysconf、pathconf和fpathconf" class="headerlink" title="函数sysconf、pathconf和fpathconf"></a>函数sysconf、pathconf和fpathconf</h4><p>运行时限制可调用下面3个函数之一获得</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(ind fd, <span class="keyword">int</span> name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="功能测试宏"><a href="#功能测试宏" class="headerlink" title="功能测试宏"></a>功能测试宏</h3><p>由于Unix版本众多，各自的实现也不同，几乎每个Unix实现都自带了自定义的功能选项，为了保证只使用POSIX标准规范定义，我们可以使用<code>_POSIX_C_SOURCE</code>宏定义和<code>_XOPEN_SOURCE</code>宏定义，这也被称为功能测试宏。我们可以给C编译器传入<code>-Dmacroname=value</code>的形式，也可以在头文件中设置宏定义。</p>
+<h3 id="基本系统数据类型"><a href="#基本系统数据类型" class="headerlink" title="基本系统数据类型"></a>基本系统数据类型</h3><p>为了保证跨平台开发使用同样的类型，Unix标准要求系统提供基本数据类型以供开发者使用，这些数据类型都已<code>_t</code>结尾，根据系统字长和平台的不同，他们具体的实现空间也不同，但是至少保证了不会因为系统不同而去关注具体实现细节。</p>
+<h3 id="习题答案"><a href="#习题答案" class="headerlink" title="习题答案"></a>习题答案</h3><h4 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h4><p>为了避免多次包含typedef语句，我们可以使用#ifndef标识</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _MACHINE_TYPES_H_  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _MACHINE_TYPES_H_  </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">_int32_t</span>;  </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">_uint32_t</span>;  </span><br><span class="line">  </span><br><span class="line">.........  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">_uint32_t</span> <span class="keyword">_size_t</span>;  </span><br><span class="line">  </span><br><span class="line">.........  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#enddef</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h4><p>macOS中C/C++的头文件的位置位于</p>
+<p><code>/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys</code></p>
+<h4 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;    //为了支持getrlimit函数以及结构体rlimit的使用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> OPEN_MAX</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">long</span> openmax = OPEN_MAX;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">long</span> openmax = <span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * If OPEN_MAX is indeterminate, this might be inadequate</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OPEN_MAX_GUESS 256</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">open_max</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rlimit</span> <span class="title">rl</span>;</span></span><br><span class="line">    <span class="keyword">if</span> (openmax ==<span class="number">0</span>)&#123;    <span class="comment">/* first time through */</span></span><br><span class="line">        errno = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ((openmax = sysconf(_SC_OPEN_MAX)) &lt; <span class="number">0</span> || openmax==LONG_MAX) &#123;</span><br><span class="line">            <span class="keyword">if</span>((openmax=getrlimit(RLIMIT_NOFILE,&amp;rl))&lt;<span class="number">0</span>)&#123;</span><br><span class="line">                err_sys(<span class="string">"can not get file limit\n"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(openmax==RLIM_INFINITY)</span><br><span class="line">                openmax = OPEN_MAX_GUESS;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                openmax=rl.rlim_max;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(openmax);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,open_max());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-25T07:48:16.199Z" itemprop="dateUpdated">2019-06-25 15:48:16</time>
+</span><br>
+
+
+        
+        本文链接：<a href="/archives/f3a516e7.html" target="_blank" rel="external">https://zhaoziwen.com.cn/archives/f3a516e7.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhaoziwen.com.cn">
+            <img src="/img/psb.jpeg" alt="z2w">
+            z2w
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apue/">apue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f3a516e7.html&title=《APUE 第二章 UNIX标准及实现》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f3a516e7.html&title=《APUE 第二章 UNIX标准及实现》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f3a516e7.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE 第二章 UNIX标准及实现》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f3a516e7.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f3a516e7.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/archives/dd2863c4.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">K-d树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "iP2YIxmQy2buSVabbV2JgaeA-gzGzoHsz",
+            appKey: "p3Mb85SlKNa9gxEMrwDeJ97o",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>z2w &copy; 2018 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">粤ICP备16110253号-2</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external nofollow noopener noreferrer">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhaoziwen.com.cn/archives/f3a516e7.html&title=《APUE 第二章 UNIX标准及实现》 — Mose's blog&pic=https://zhaoziwen.com.cn/img/psb.jpeg" data-title="微博" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhaoziwen.com.cn/archives/f3a516e7.html&title=《APUE 第二章 UNIX标准及实现》 — Mose's blog&source=This is a personal blog, which is belong to zhaoziwen and whose goal is to re..." data-title=" QQ" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhaoziwen.com.cn/archives/f3a516e7.html" data-title=" Facebook" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE 第二章 UNIX标准及实现》 — Mose's blog&url=https://zhaoziwen.com.cn/archives/f3a516e7.html&via=https://zhaoziwen.com.cn" data-title=" Twitter" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhaoziwen.com.cn/archives/f3a516e7.html" data-title=" Google+" rel="external nofollow noopener noreferrer">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3aQY7CMAwFUO5/aUaa7dDMt10WTV5WCArJY2HZjl+veL1/19U7V5+uv3X1/NUzNywMDIzHMt7LlW+fH2v9+39fr8+GgYFxDmMdZJNnkkhYDe6FfTEwMDCCQNyjXu2CgYGBMQm4k4I2XxgYGBi9Ijb/NClZe4H+hlocAwPjgYxJYfnt11+838DAwHgI4z1YednZK4YLJ8HAwNia0Wvc58ni5KI0L2gxMDBOYFTHKaqjEtVEMylWmyMXGBgYD2esSd+4GMj/st6QBwYGxk6MeZs+/wt6yWUhvGJgYGzH6F0r9gbFCo2zarDGwMDYmtFr3/ea+9XyuDfYgYGBsR9jnd5VAdVWfjVkY2BgnMzIG17VgJuH7+pw2IcxCwwMjK0ZeUqXt9Im7OqQBwYGxt6MalttEkDzw+WXo+U7WAwMjIczkgPliWB1rxzzzy4YGBiHMXplbTU1zFt+GBgYJzPylC5J3Xrhcn4JgYGBsTejmiDmxWd+uGpDDQMD4zRGHjSTo+RP5hcJUZGMgYFxACNv90+SwtsOjYGBcRijd8VYPWKO7/3dGBgYuzLexZUE05zXG+b4sBcGBsbWjGrArX46ufjsjWVgYGDsyugVk5Pis5dWRhcDGBgYWzPycFkdpMh/rVpIv+7aGAMDYztGtbzsZabl8hUDAwMjbvHP30+S0VHAxcDAeCxjMnKxPmLvu6NBCgwMjO0Yd10M5C223hDGbTMjGBgYT2L8AAXa+gizGsdUAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
